@@ -1897,6 +1897,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
         final boolean halfWayDone = mScrollView.getVisibility() == View.VISIBLE;
         final int zeroOutDelays = halfWayDone ? 0 : 1;
 
+        if (!halfWayDone) {
+            mScrollView.setScaleX(0f);
+            mFlipSettingsView.setScaleX(1f);
+        }
+
         mScrollView.setVisibility(View.VISIBLE);
         mScrollViewAnim = start(
             startDelay(FLIP_DURATION_OUT * zeroOutDelays,
@@ -2025,6 +2030,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
 
         final boolean halfWayDone = mFlipSettingsView.getVisibility() == View.VISIBLE;
         final int zeroOutDelays = halfWayDone ? 0 : 1;
+
+        if (!halfWayDone) {
+            mFlipSettingsView.setScaleX(0f);
+            mScrollView.setScaleX(1f);
+        }
 
         mFlipSettingsView.setVisibility(View.VISIBLE);
         mFlipSettingsViewAnim = start(
