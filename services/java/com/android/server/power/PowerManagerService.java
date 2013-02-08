@@ -1485,9 +1485,13 @@ public final class PowerManagerService extends IPowerManager.Stub
                             mButtonsLight.setBrightness(0);
                             mKeyboardLight.setBrightness(0);
                         } else {
-                            mButtonsLight.setBrightness(buttonBrightness);
-                            if (buttonBrightness != 0 && mButtonTimeout != 0) {
-                                nextTimeout = now + mButtonTimeout;
+                            int brightness = mButtonBrightnessOverrideFromWindowManager >= 0
+                                    ? mButtonBrightnessOverrideFromWindowManager
+                                    : mDisplayPowerRequest.screenBrightness;
+                            mButtonsLight.setBrightness(brightness);
+                            mKeyboardLight.setBrightness(mKeyboardVisible ? brightness : 0);
+                            if (brightness != 0) {
+                                nextTimeout = now + BUTTON_ON_DURATION;
                             }
                         }
                         mUserActivitySummary |= USER_ACTIVITY_SCREEN_BRIGHT;

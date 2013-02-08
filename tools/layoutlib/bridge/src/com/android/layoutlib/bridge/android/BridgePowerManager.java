@@ -140,5 +140,4 @@ public class BridgePowerManager implements IPowerManager {
     public void setKeyboardLight(boolean on, int key) {
         // pass for now
     }
-
 }
