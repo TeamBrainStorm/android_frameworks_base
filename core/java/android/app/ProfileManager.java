@@ -110,7 +110,6 @@ public class ProfileManager {
     public static final String EXTRA_PROFILE_PICKED_UUID =
             "android.intent.extra.profile.PICKED_UUID";
 
-
     /**
      * Broadcast intent action indicating that Profiles has been enabled or disabled.
      * One extra provides this state as an int.
