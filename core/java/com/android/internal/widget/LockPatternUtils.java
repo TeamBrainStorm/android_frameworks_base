@@ -18,6 +18,8 @@ package com.android.internal.widget;
 
 import android.Manifest;
 import android.app.ActivityManagerNative;
+import android.app.Profile;
+import android.app.ProfileManager;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ContentResolver;
@@ -149,6 +151,7 @@ public class LockPatternUtils {
     private final ContentResolver mContentResolver;
     private DevicePolicyManager mDevicePolicyManager;
     private ILockSettings mLockSettingsService;
+    private ProfileManager mProfileManager;
 
     private final boolean mMultiUserMode;
 
@@ -173,6 +176,7 @@ public class LockPatternUtils {
     public LockPatternUtils(Context context) {
         mContext = context;
         mContentResolver = context.getContentResolver();
+        mProfileManager = (ProfileManager) context.getSystemService(Context.PROFILE_SERVICE);
 
         // If this is being called by the system or by an application like keyguard that
         // has permision INTERACT_ACROSS_USERS, then LockPatternUtils will operate in multi-user
@@ -1236,8 +1240,10 @@ public class LockPatternUtils {
                 || mode == DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC
                 || mode == DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC
                 || mode == DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
-        final boolean secure = isPattern && isLockPatternEnabled() && savedPatternExists()
-                || isPassword && savedPasswordExists();
+        final boolean isProfileSecure = mProfileManager.getActiveProfile()
+                .getScreenLockModeWithDPM(mContext) == Profile.LockMode.DEFAULT;
+        final boolean secure = (isPattern && isLockPatternEnabled() && savedPatternExists()
+                || isPassword && savedPasswordExists()) && isProfileSecure;
         return secure;
     }
 
