@@ -2154,6 +2154,12 @@ public final class Settings {
             "notifications_use_ring_volume";
 
         /**
+         * Whether the blacklisting feature for phone calls is enabled
+         * @hide
+         */
+        public static final String PHONE_BLACKLIST_ENABLED = "phone_blacklist_enabled";
+
+        /**
          * Whether a notification should be shown when a call/message is blocked
          * @hide
          */
@@ -2177,14 +2183,17 @@ public final class Settings {
          * @hide
          */
         public static final int BLACKLIST_DO_NOT_BLOCK = 0;
+
         /**
          * @hide
          */
         public static final int BLACKLIST_BLOCK = 1;
+
         /**
          * @hide
          */
         public static final int BLACKLIST_PHONE_SHIFT = 0;
+
         /**
          * @hide
          */
@@ -3330,7 +3339,7 @@ public final class Settings {
             PHONE_BLACKLIST_NOTIFY_ENABLED,
             PHONE_BLACKLIST_PRIVATE_NUMBER_MODE,
             PHONE_BLACKLIST_UNKNOWN_NUMBER_MODE,
-            PHONE_BLACKLIST_REGEX_ENABLED,
+            PHONE_BLACKLIST_REGEX_ENABLED
         };
 
         // Settings moved to Settings.Secure
