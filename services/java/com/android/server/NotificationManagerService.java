@@ -1328,6 +1328,10 @@ public class NotificationManagerService extends INotificationManager.Stub
             if (uri == null || ENABLED_NOTIFICATION_LISTENERS_URI.equals(uri)) {
                 rebindListenerServices();
             }
+
+            if (uri == null || ENABLED_NOTIFICATION_LISTENERS_URI.equals(uri)) {
+                rebindListenerServices();
+            }
         }
     }
 
