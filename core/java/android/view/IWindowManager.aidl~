@@ -296,7 +296,7 @@ interface IWindowManager
      */
     void setTouchExplorationEnabled(boolean enabled);
 
-
+<<<<<<< HEAD
     /**
      * Get the current navigation bar state when expanded desktop is enabled.
      *
@@ -318,7 +318,7 @@ interface IWindowManager
      * @hide
      */
     int getCurrentNavigationBarSize();
-
+=======
     /** SPLIT VIEW **/
     boolean isTaskSplitView(int taskId);
     void setTaskSplitView(int taskId, boolean split);
