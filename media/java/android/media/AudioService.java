@@ -4192,13 +4192,13 @@ public class AudioService extends IAudioService.Stub {
                     adjustCurrentStreamVolume();
                     // TODO: Cap volume at safe levels
 
-                    Intent playerIntent = new Intent(Intent.ACTION_MAIN);
-                    playerIntent.addCategory(Intent.CATEGORY_APP_MUSIC);
-                    playerIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    try {
+                    boolean launchPlayer = Settings.System.getInt(context.getContentResolver(),
+                            Settings.System.HEADSET_CONNECT_PLAYER, 0) != 0;
+                    if (launchPlayer) {
+                        Intent playerIntent = new Intent(Intent.ACTION_MAIN);
+                        playerIntent.addCategory(Intent.CATEGORY_APP_MUSIC);
+                        playerIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(playerIntent);
-                    } catch (ActivityNotFoundException e) {
-                        Log.w(TAG, "No music player found to start after headset connection");
                     }
                 } else {
                     // Headset disconnected
