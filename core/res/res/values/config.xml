@@ -1402,6 +1402,9 @@
     <!-- Integer to configure panel auto brightness mode when changed -->
     <integer name="config_panelAutoBrightnessValue">-1</integer>
 
+    <!-- True if the gesture service should be started at system start -->
+    <bool name="config_enableGestureService">false</bool>
+
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
