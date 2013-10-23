@@ -2137,22 +2137,34 @@ public final class Settings {
             "notifications_use_ring_volume";
 
         /**
-         * Whether the phone ringtone should be played in an increasing manner
+         * Volume Overlay Mode, This is behaviour of the volume overlay panel
+         * Defaults to 1 - which is expandable
          * @hide
          */
-        public static final String INCREASING_RING = "increasing_ring";
+        public static final String MODE_VOLUME_OVERLAY = "mode_volume_overlay";
+
+        /** @hide */
+        public static final int VOLUME_OVERLAY_SINGLE = 0;
+        /** @hide */
+        public static final int VOLUME_OVERLAY_EXPANDABLE = 1;
+        /** @hide */
+        public static final int VOLUME_OVERLAY_EXPANDED = 2;
+        /** @hide */
+        public static final int VOLUME_OVERLAY_NONE = 3;
 
         /**
-         * Minimum volume index for increasing ring volume
+         * Volume Adjust Sounds Enable, This is the noise made when using volume hard buttons
+         * Defaults to 1 - sounds enabled
          * @hide
          */
-        public static final String INCREASING_RING_MIN_VOLUME = "increasing_ring_min_vol";
+        public static final String VOLUME_ADJUST_SOUNDS_ENABLED = "volume_adjust_sounds_enabled";
 
         /**
-         * Time (in ms) between ringtone volume increases
+         * Boolean value whether to link ringtone and notification volumes
+         *
          * @hide
          */
-        public static final String INCREASING_RING_INTERVAL = "increasing_ring_interval";
+        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
          * Whether silent mode should allow vibration feedback. This is used
