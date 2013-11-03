@@ -76,7 +76,7 @@ public final class ShutdownThread extends Thread {
 
     // static instance of this thread
     private static final ShutdownThread sInstance = new ShutdownThread();
-    
+
     private final Object mActionDoneSync = new Object();
     private boolean mActionDone;
     private Context mContext;
@@ -132,24 +132,28 @@ public final class ShutdownThread extends Thread {
             if (mReboot && !mRebootSafeMode){
                 sConfirmDialog = new AlertDialog.Builder(context)
                         .setTitle(com.android.internal.R.string.reboot_system)
-                        .setSingleChoiceItems(com.android.internal.R.array.shutdown_reboot_options, 0, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(com.android.internal.R.array.shutdown_reboot_options,
+                                0, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which < 0)
                                     return;
 
-                                String actions[] = context.getResources().getStringArray(com.android.internal.R.array.shutdown_reboot_actions);
+                                String actions[] = context.getResources().getStringArray(
+                                        com.android.internal.R.array.shutdown_reboot_actions);
 
                                 if (actions != null && which < actions.length)
                                     mRebootReason = actions[which];
                             }
                         })
-                        .setPositiveButton(com.android.internal.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(com.android.internal.R.string.yes,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 mReboot = true;
                                 beginShutdownSequence(context);
                             }
                         })
-                        .setNegativeButton(com.android.internal.R.string.no, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(com.android.internal.R.string.no,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 mReboot = false;
                                 dialog.cancel();
@@ -157,7 +161,8 @@ public final class ShutdownThread extends Thread {
                         })
                         .create();
                         sConfirmDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-                            public boolean onKey (DialogInterface dialog, int keyCode, KeyEvent event) {
+                            public boolean onKey (DialogInterface dialog,
+                                    int keyCode, KeyEvent event) {
                                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                                     mReboot = false;
                                     dialog.cancel();
@@ -167,17 +172,17 @@ public final class ShutdownThread extends Thread {
                         });
             } else {
                 sConfirmDialog = new AlertDialog.Builder(context)
-                        .setTitle(mRebootSafeMode
-                                ? com.android.internal.R.string.reboot_safemode_title
-                                : com.android.internal.R.string.power_off)
-                        .setMessage(resourceId)
-                        .setPositiveButton(com.android.internal.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                beginShutdownSequence(context);
-                            }
-                        })
-                        .setNegativeButton(com.android.internal.R.string.no, null)
-                        .create();
+                    .setTitle(mRebootSafeMode
+                            ? com.android.internal.R.string.reboot_safemode_title
+                            : com.android.internal.R.string.power_off)
+                    .setMessage(resourceId)
+                    .setPositiveButton(com.android.internal.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            beginShutdownSequence(context);
+                        }
+                    })
+                    .setNegativeButton(com.android.internal.R.string.no, null)
+                    .create();
             }
 
             closer.dialog = sConfirmDialog;
@@ -346,7 +351,7 @@ public final class ShutdownThread extends Thread {
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         mContext.sendOrderedBroadcastAsUser(intent,
                 UserHandle.ALL, null, br, mHandler, 0, null, null);
-        
+
         final long endTime = SystemClock.elapsedRealtime() + MAX_BROADCAST_TIME;
         synchronized (mActionDoneSync) {
             while (!mActionDone) {

@@ -3129,24 +3129,6 @@ public final class Settings {
         public static final String SYSTEM_PROFILES_ENABLED = "system_profiles_enabled";
 
         /**
-         * Whether the power menu reboot menu is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_REBOOT_ENABLED = "power_menu_reboot_enabled";
-
-        /**
-         * Whether power menu screenshot is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_SCREENSHOT_ENABLED = "power_menu_screenshot_enabled";
-
-        /**
-         * Whether power menu profiles switcher is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_PROFILES_ENABLED = "power_menu_profiles_enabled";
-
-        /**
          * Enable Stylus Gestures
          *
          * @hide
@@ -3194,24 +3176,6 @@ public final class Settings {
          * @hide
          */
         public static final String GESTURES_DOUBLE_TAP = "gestures_double_tap";
-
-        /**
-         * Whether power menu airplane toggle is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_AIRPLANE_ENABLED = "power_menu_airplane_enabled";
-
-        /**
-         * Whether power menu user switcher is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_USER_ENABLED = "power_menu_user_enabled";
-
-        /**
-         * Whether power menu silent mode is enabled
-         * @hide
-         */
-        public static final String POWER_MENU_SOUND_ENABLED = "power_menu_silent_enabled";
 
         /**
          * Swap volume buttons when the screen is rotated
@@ -3631,6 +3595,13 @@ public final class Settings {
         public static final String RECENTS_RAM_BAR_ACTIVE_APPS_COLOR = "recents_ram_bar_active_apps_color";
 
         /**
+         * Config for advanced power menu
+         *
+         * @hide
+         */
+        public static final String POWER_MENU_CONFIG = "power_menu_config";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -3712,12 +3683,6 @@ public final class Settings {
             QUIET_HOURS_STILL,
             QUIET_HOURS_DIM,
             SYSTEM_PROFILES_ENABLED,
-            POWER_MENU_SCREENSHOT_ENABLED,
-            POWER_MENU_REBOOT_ENABLED,
-            POWER_MENU_PROFILES_ENABLED,
-            POWER_MENU_AIRPLANE_ENABLED,
-            POWER_MENU_SOUND_ENABLED,
-            POWER_MENU_USER_ENABLED,
             PHONE_BLACKLIST_ENABLED,
             PHONE_BLACKLIST_NOTIFY_ENABLED,
             PHONE_BLACKLIST_PRIVATE_NUMBER_MODE,

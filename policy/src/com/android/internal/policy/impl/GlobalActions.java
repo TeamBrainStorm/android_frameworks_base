@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
- * Copyright (C) 2010-2012 CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +29,7 @@ import android.app.Profile;
 import android.app.ProfileManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -72,8 +72,6 @@ import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.internal.app.ThemeUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -87,6 +85,8 @@ import android.os.IBinder;
 import android.os.Messenger;
 import android.os.RemoteException;
 
+import com.android.internal.util.liquid.PolicyConstants;
+import com.android.internal.util.liquid.PolicyHelper;
 
 /**
  * Helper to show the global actions dialog.  Each item is an {@link Action} that
@@ -101,8 +101,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     private final Context mContext;
     private final WindowManagerFuncs mWindowManagerFuncs;
-
-    private Context mUiContext;
     private final AudioManager mAudioManager;
     private final IDreamManager mDreamManager;
 
@@ -120,6 +118,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private boolean mIsWaitingForEcmExit = false;
     private boolean mHasTelephony;
     private boolean mHasVibrator;
+    private Profile mChosenProfile;
     private final boolean mShowSilentToggle;
 
     private Profile mChosenProfile;
@@ -140,8 +139,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(TelephonyIntents.ACTION_EMERGENCY_CALLBACK_MODE_CHANGED);
         context.registerReceiver(mBroadcastReceiver, filter);
-
-        ThemeUtils.registerThemeChangeReceiver(context, mThemeChangeReceiver);
 
         // get notified of phone state changes
         TelephonyManager telephonyManager =
@@ -167,7 +164,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     public void showDialog(boolean keyguardShowing, boolean isDeviceProvisioned) {
         mKeyguardShowing = keyguardShowing;
         mDeviceProvisioned = isDeviceProvisioned;
-        if (mDialog != null && mUiContext == null) {
+        if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
             // Show delayed, so that the dismiss of the previous dialog completes
@@ -199,13 +196,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mDialog.getWindow().setAttributes(attrs);
         mDialog.show();
         mDialog.getWindow().getDecorView().setSystemUiVisibility(View.STATUS_BAR_DISABLE_EXPAND);
-    }
-
-    private Context getUiContext() {
-        if (mUiContext == null) {
-            mUiContext = ThemeUtils.createUiContext(mContext);
-        }
-        return mUiContext != null ? mUiContext : mContext;
     }
 
     /**
@@ -262,59 +252,17 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         };
         onAirplaneModeChanged();
 
+        final ContentResolver cr = mContext.getContentResolver();
         mItems = new ArrayList<Action>();
-
-        // first: power off
-        mItems.add(
-            new SinglePressAction(
-                    com.android.internal.R.drawable.ic_lock_power_off,
-                    R.string.global_action_power_off) {
-
-                public void onPress() {
-                    // shutdown by making sure radio and power are handled accordingly.
-                    mWindowManagerFuncs.shutdown(true);
-                }
-
-                public boolean showDuringKeyguard() {
-                    return true;
-                }
-
-                public boolean showBeforeProvisioning() {
-                    return true;
-                }
-            });
-
-        // next: reboot
-        // only shown if enabled, enabled by default
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_REBOOT_ENABLED, 1) == 1) {
-            mItems.add(
-                new SinglePressAction(R.drawable.ic_lock_reboot, R.string.global_action_reboot) {
-                    public void onPress() {
-                        mWindowManagerFuncs.reboot();
-                    }
-
-                    public boolean onLongPress() {
-                        mWindowManagerFuncs.rebootSafeMode(true);
-                        return true;
-                    }
-
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
-
-                    public boolean showBeforeProvisioning() {
-                        return true;
-                    }
-                });
-        }
 
         // next: profile
         // only shown if both system profiles and the menu item is enabled, enabled by default
-        if ((Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1) &&
-                (Settings.System.getInt(mContext.getContentResolver(),
-                        Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1)) {
+        boolean showProfiles =
+                Settings.System.getIntForUser(cr,
+                        Settings.System.SYSTEM_PROFILES_ENABLED, 1, UserHandle.USER_CURRENT) == 1
+                && Settings.System.getIntForUser(cr,
+                        Settings.System.POWER_MENU_PROFILES_ENABLED, 1, UserHandle.USER_CURRENT) == 1;
+        if (showProfiles) {
             mItems.add(
                 new ProfileChooseAction() {
                     public void onPress() {
@@ -335,33 +283,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 });
         }
 
-        // next: screenshot
-        // only shown if enabled, disabled by default
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_SCREENSHOT_ENABLED, 0) == 1) {
-            mItems.add(
-                new SinglePressAction(R.drawable.ic_lock_screenshot, R.string.global_action_screenshot) {
-                    public void onPress() {
-                        takeScreenshot();
-                    }
-
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
-
-                    public boolean showBeforeProvisioning() {
-                        return true;
-                    }
-                });
-        }
-
-        // next: airplane mode
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1) {
-            mItems.add(mAirplaneModeOn);
-        }
-
-        // next: bug report, if enabled
+        // bug report, if enabled
         if (Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0 && isCurrentUserOwner()) {
             mItems.add(
@@ -410,27 +332,87 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 });
         }
 
-        // next: optionally add a list of users to switch to
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_USER_ENABLED, 0) == 1) {
-            addUsersToMenu(mItems);
+        String[] powerMenuConfig = PolicyHelper.getPowerMenuConfig(mContext);
+        for (String config:powerMenuConfig) {
+            // power off
+            if (config.equals(PolicyConstants.ACTION_POWER_OFF)) {
+                mItems.add(
+                    new SinglePressAction(R.drawable.ic_lock_power_off,
+                            R.string.global_action_power_off) {
+
+                        public void onPress() {
+                            // shutdown by making sure radio and power are handled accordingly.
+                            mWindowManagerFuncs.shutdown(true);
+                        }
+
+                        public boolean showDuringKeyguard() {
+                            return true;
+                        }
+
+                        public boolean showBeforeProvisioning() {
+                            return true;
+                        }
+                    });
+            // reboot
+            } else if (config.equals(PolicyConstants.ACTION_REBOOT)) {
+                mItems.add(
+                    new SinglePressAction(R.drawable.ic_lock_reboot,
+                            R.string.global_action_reboot) {
+                        public void onPress() {
+                            mWindowManagerFuncs.reboot();
+                        }
+
+                        public boolean onLongPress() {
+                            mWindowManagerFuncs.rebootSafeMode(true);
+                            return true;
+                        }
+
+                        public boolean showDuringKeyguard() {
+                            return true;
+                        }
+
+                        public boolean showBeforeProvisioning() {
+                            return true;
+                        }
+                    });
+            // screenshot
+            } else if (config.equals(PolicyConstants.ACTION_SCREENSHOT)) {
+                mItems.add(
+                    new SinglePressAction(R.drawable.ic_lock_screenshot,
+                            R.string.global_action_screenshot) {
+                        public void onPress() {
+                            takeScreenshot();
+                        }
+
+                        public boolean showDuringKeyguard() {
+                            return true;
+                        }
+                        public boolean showBeforeProvisioning() {
+                            return true;
+                        }
+                    });
+            // airplane mode
+            } else if (config.equals(PolicyConstants.ACTION_AIRPLANE)) {
+                mItems.add(mAirplaneModeOn);
+            // silent mode
+            } else if ((config.equals(PolicyConstants.ACTION_SOUND)) && (mShowSilentToggle)) {
+                mItems.add(mSilentModeAction);
+            }
         }
 
-        // last: silent mode
-        if ((Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.POWER_MENU_SOUND_ENABLED, 1) == 1) &&
-                (mShowSilentToggle)) {
-            mItems.add(mSilentModeAction);
+        // one more thing: optionally add a list of users to switch to
+        if (SystemProperties.getBoolean("fw.power_user_switcher", false)) {
+            addUsersToMenu(mItems);
         }
 
         mAdapter = new MyAdapter();
 
-        AlertParams params = new AlertParams(getUiContext());
+        AlertParams params = new AlertParams(mContext);
         params.mAdapter = mAdapter;
         params.mOnClickListener = this;
         params.mForceInverseBackground = true;
 
-        GlobalActionsDialog dialog = new GlobalActionsDialog(getUiContext(), params);
+        GlobalActionsDialog dialog = new GlobalActionsDialog(mContext, params);
         dialog.setCanceledOnTouchOutside(false); // Handled by the custom class.
 
         dialog.getListView().setItemsCanFocus(true);
@@ -443,7 +425,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                         return mAdapter.getItem(position).onLongPress();
                     }
         });
-
         dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
 
         dialog.setOnDismissListener(this);
@@ -596,13 +577,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                         msg.replyTo = new Messenger(h);
                         msg.arg1 = msg.arg2 = 0;
 
-                        /*  remove for the time being
-                        if (mStatusBar != null && mStatusBar.isVisibleLw())
-                            msg.arg1 = 1;
-                        if (mNavigationBar != null && mNavigationBar.isVisibleLw())
-                            msg.arg2 = 1;
-                         */                        
-
                         /* wait for the dialog box to close */
                         try {
                             Thread.sleep(1000); 
@@ -733,8 +707,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
         public View getView(int position, View convertView, ViewGroup parent) {
             Action action = getItem(position);
-            final Context context = getUiContext();
-            return action.create(context, convertView, parent, LayoutInflater.from(context));
+            return action.create(mContext, convertView, parent, LayoutInflater.from(mContext));
         }
     }
 
@@ -1119,12 +1092,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                     changeAirplaneModeSystemSetting(true);
                 }
             }
-        }
-    };
-
-    private BroadcastReceiver mThemeChangeReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            mUiContext = null;
         }
     };
 
