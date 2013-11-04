@@ -310,5 +310,7 @@ interface ITelephony {
      * Sets minimum time in milli-seconds between onCellInfoChanged
      */
     void setCellInfoListRate(int rateInMillis);
+
+    int getLteOnGsmMode();
 }
 
