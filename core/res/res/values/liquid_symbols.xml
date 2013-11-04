@@ -21,6 +21,7 @@
   <!-- Config.xml entries -->
   <java-symbol type="bool" name="config_forceDisableHardwareKeyboard" />
   <java-symbol type="bool" name="config_hasRotationLockSwitch" />
+  <java-symbol type="integer" name="config_wallpaperMaxWidth" />
 
   <!-- Notification and battery light -->
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
@@ -77,10 +78,10 @@
   <java-symbol type="bool" name="config_samsung_stk" />
   <java-symbol type="bool" name="config_smsSamsungCdmaAlternateMessageIDEncoding" />
 
-  <!-- WiFi -->
+  <!-- WiFi AP firmware -->
   <java-symbol type="bool" name="config_wifiApFirmwareReload" />
 
-  <!-- In WiFi AP notification -->
+  <!-- WiFi AP notification -->
   <java-symbol type="string" name="notify_turn_wifi_ap_off_title" />
 
 </resources>
