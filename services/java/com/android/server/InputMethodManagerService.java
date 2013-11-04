@@ -15,6 +15,8 @@
 
 package com.android.server;
 
+import android.provider.Settings.SettingNotFoundException;
+
 import com.android.internal.app.ThemeUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.inputmethod.InputMethodUtils;
@@ -402,7 +404,11 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_IME_SWITCHER),
-                    false, this, UserHandle.USER_ALL);
+                    false, new ContentObserver(mHandler) {
+                        public void onChange(boolean selfChange) {
+                            updateFromSettingsLocked(true);
+                        }
+                    });
         }
 
         @Override public void onChange(boolean selfChange) {
