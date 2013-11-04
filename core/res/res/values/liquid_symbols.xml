@@ -80,12 +80,6 @@
   <java-symbol type="bool" name="config_samsung_stk" />
   <java-symbol type="array" name="config_telephony_set_audioparameters" />
 
-  <!-- WiFi AP firmware -->
-  <java-symbol type="bool" name="config_wifiApFirmwareReload" />
-
-  <!-- WiFi AP notification -->
-  <java-symbol type="string" name="notify_turn_wifi_ap_off_title" />
-
   <!--  Animations -->
   <java-symbol type="string" name="action_null"/>
   <java-symbol type="string" name="animation_fade"/>
@@ -132,5 +126,12 @@
   <!-- HW rotation lock -->
   <java-symbol type="string" name="toast_rotation_unlocked" />
   <java-symbol type="string" name="toast_rotation_locked" />
+
+  <!-- WiFi AP firmware -->
+  <java-symbol type="bool" name="config_wifiApFirmwareReload" />
+  <java-symbol type="bool" name="config_wifiApStartInterface" />
+
+  <!-- WiFi AP notification -->
+  <java-symbol type="string" name="notify_turn_wifi_ap_off_title" />
 
 </resources>
