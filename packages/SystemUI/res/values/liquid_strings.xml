@@ -69,4 +69,7 @@
     <!-- Kill App Toast -->
     <string name="app_killed_message">App Killed</string>
 
+    <!--Screenshot Trash-->
+    <string name="screenshot_notification_delete">Delete</string>
+
 </resources>
