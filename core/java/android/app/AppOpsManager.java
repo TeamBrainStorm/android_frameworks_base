@@ -1224,6 +1224,7 @@ public class AppOpsManager {
         return PRIVACY_GUARD_DISABLED;
     }
 
+    /** @hide */
     public void setPrivacyGuardSettingForPackage(int uid, String packageName,
             boolean state, boolean forceAll) {
         try {
