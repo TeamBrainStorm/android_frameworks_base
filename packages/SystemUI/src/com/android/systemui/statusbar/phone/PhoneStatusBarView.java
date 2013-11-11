@@ -250,6 +250,6 @@ public class PhoneStatusBarView extends PanelBar {
 
         mBar.animateHeadsUp(mNotificationPanel == panel, mPanelExpandedFractionSum);
 
-        mBar.updateCarrierLabelVisibility(false);
+        mBar.updateCarrierAndWifiLabelVisibility(false);
     }
 }
