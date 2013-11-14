@@ -45,7 +45,7 @@ import android.widget.LinearLayout;
 import com.android.internal.util.liquid.ButtonsHelper;
 import com.android.internal.util.liquid.ButtonConfig;
 import com.android.internal.util.liquid.ButtonsConstants;
-import com.android.internal.util.liquid.ColorHelper;
+import com.android.internal.util.liquid.ImageHelper;
 
 import com.android.systemui.R;
 
@@ -256,7 +256,7 @@ public class ShortcutsWidget extends LinearLayout {
                             && !buttonConfig.getIcon().equals(ButtonsConstants.ICON_EMPTY)
                             && mColorizeMode != 1))
                         && mColorizeMode != 3) {
-                        iv.setImageBitmap(ColorHelper.getColoredBitmap(front, mColor));
+                        iv.setImageBitmap(ImageHelper.getColoredBitmap(front, mColor));
                     } else {
                         iv.setImageDrawable(front);
                     }
