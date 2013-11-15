@@ -497,7 +497,6 @@
     <!-- QuickSettings: Brightness dialog auto brightness button [CHAR LIMIT=NONE] -->
     <string name="quick_settings_brightness_dialog_auto_brightness_label">AUTO</string>
 
-
     <!-- Glyph to be overlaid atop the battery when the level is extremely low. Do not translate. -->
     <string name="battery_meter_very_low_overlay_symbol">!</string>
 
@@ -507,5 +506,8 @@
          linebreak to position it correctly.  [CHAR LIMIT=45] -->
     <string name="ssl_ca_cert_warning">Network may\nbe monitored</string>
 
+<<<<<<< HEAD
     <string name="powerwidget_screen_timeout_toast">Screen timeout set to: %1$d %2$s</string>
+=======
+>>>>>>> ec58c15... Framework and SystemUI: Refactor CM Additions resources
 </resources>
