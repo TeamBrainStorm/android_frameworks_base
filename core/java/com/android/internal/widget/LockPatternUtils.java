@@ -1359,5 +1359,4 @@ public class LockPatternUtils {
     public void setWidgetsEnabled(boolean enabled, int userId) {
         setBoolean(LOCKSCREEN_WIDGETS_ENABLED, enabled, userId);
     }
-
 }
