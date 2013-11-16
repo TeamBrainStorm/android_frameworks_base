@@ -2756,6 +2756,7 @@ public final class Settings {
          * @hide
          */
         public static final String TORCH_STATE = "torch_state";
+
         /**
          * Pointer speed setting.
          * This is an integer value in a range between -7 and +7, so there are 15 possible values.
@@ -2881,39 +2882,39 @@ public final class Settings {
         public static final String NAV_BUTTONS = "nav_buttons";
 
         /**
-        * Notification Power Widget - Custom Brightness Mode
-        * @hide
-        */
+         * Notification Power Widget - Custom Brightness Mode
+         * @hide
+         */
         public static final String EXPANDED_BRIGHTNESS_MODE = "expanded_brightness_mode";
 
         /**
-        * Notification Power Widget - Custom Network Mode
-        * @hide
-        */
+         * Notification Power Widget - Custom Network Mode
+         * @hide
+         */
         public static final String EXPANDED_NETWORK_MODE = "expanded_network_mode";
 
         /**
-        * Notification Power Widget - Custom Screen Timeout
-        * @hide
-        */
+         * Notification Power Widget - Custom Screen Timeout
+         * @hide
+         */
         public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
 
         /**
-        * Notification Power Widget - Custom Ring Mode
-        * @hide
-        */
+         * Notification Power Widget - Custom Ring Mode
+         * @hide
+         */
         public static final String EXPANDED_RING_MODE = "expanded_ring_mode";
 
         /**
-        * Notification Power Widget - Custom Torch Mode
-        * @hide
-        */
+         * Notification Power Widget - Custom Torch Mode
+         * @hide
+         */
         public static final String EXPANDED_FLASH_MODE = "expanded_flash_mode";
 
         /**
-        * AutoHide CombinedBar on tablets.
-        * @hide
-        */
+         * AutoHide CombinedBar on tablets.
+         * @hide
+         */
         public static final String COMBINED_BAR_AUTO_HIDE = "combined_bar_auto_hide";
 
         /**
@@ -3085,7 +3086,7 @@ public final class Settings {
          * Show the pending notification counts as overlays on the status bar
          * @hide
          */
-        public static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
+        public static final String STATUS_BAR_NOTIFICATION_COUNT = "status_bar_notification_count";
 
         /**
          * Show the pending notification counts as overlays on the status bar
@@ -3158,16 +3159,15 @@ public final class Settings {
         public static final String SYSTEM_POWER_CRT_MODE = "system_power_crt_mode";
 
         /**
-          * Volume keys control cursor in text fields (default is 0)
-          * 0 - Disabled
-          * 1 - Volume up/down moves cursor left/right
-          * 2 - Volume up/down moves cursor right/left
-          * @hide
-          */
-         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+         * Volume keys control cursor in text fields (default is 0)
+         * 0 - Disabled
+         * 1 - Volume up/down moves cursor left/right
+         * 2 - Volume up/down moves cursor right/left
+         * @hide
+         */
+        public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
-<<<<<<< HEAD
          * Override and forcefully disable the fullscreen keyboard
          * @hide
          */
