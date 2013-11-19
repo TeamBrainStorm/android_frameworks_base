@@ -16,7 +16,9 @@
  * limitations under the License.
  */
 -->
+
 <resources>
+
     <drawable name="notification_number_text_color">#ff000000</drawable>
     <drawable name="ticker_background_color">#ff1d1d1d</drawable>
     <drawable name="system_bar_background">@color/system_bar_background_opaque</drawable>
@@ -36,15 +38,5 @@
     <color name="batterymeter_charge_color">#FFFFFFFF</color>
     <color name="batterymeter_bolt_color">#FF000000</color><!-- 100% black -->
     <color name="status_bar_clock_color">#FFFFFFFF</color>
-
-    <!-- Notification Shortcuts -->
-    <drawable name="notification_shortcut_background_color">#00000000</drawable>
-    <drawable name="notification_item_background_color">#ff111111</drawable>
-    <drawable name="notification_item_background_color_pressed">#ffaaaaaa</drawable>
-    <color name="notification_shortcut_color">#FFFFFFFF</color>
-
-    <!-- Navigation bar -->
-    <color name="navigationbar_button_default_color">#FFFFFFFF</color>
-    <color name="navigationbar_button_glow_default_color">#FFFFFFFF</color>
 
 </resources>

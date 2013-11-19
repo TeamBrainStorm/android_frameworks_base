@@ -480,10 +480,13 @@ public class SearchPanelView extends FrameLayout implements
                         customIcon = resize(
                             new BitmapDrawable(getResources(), iconFile.getAbsolutePath()));
                     } else {
-                        customIcon = resize(mResources.getDrawable(mResources.getIdentifier(
+                        customIcon = new BitmapDrawable(getResources(),
+                                    ColorHelper.getColoredBitmap(ColorHelper.resize(mContext,
+                                    getResources().getDrawable(getResources().getIdentifier(
                                     customIconUri.substring(
                                     ButtonsConstants.SYSTEM_ICON_IDENTIFIER.length()),
-                                    "drawable", "android")));
+                                    "drawable", "android")), 50),
+                                    getResources().getColor(R.color.navring_system_icon_default_color)));
                     }
                     return new TargetDrawable(mResources, setStateListDrawable(customIcon));
                 } catch (Exception e) {
