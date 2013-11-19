@@ -119,7 +119,15 @@ final class ProcessList {
     // we have no limit on the number of service, visible, foreground, or other such
     // processes and the number of those processes does not count against the cached
     // process limit.
-    static final int MAX_CACHED_APPS = 24;
+    static final int MAX_CACHED_APPS;
+
+    static {
+        // Allow more hidden apps on huge memory devices (1.5GB or higher)
+        // or fetch from the system property
+        MemInfoReader mi = new MemInfoReader();
+        MAX_CACHED_APPS = SystemProperties.getInt("sys.mem.max_hidden_apps",
+                mi.getTotalSize() > 1572864 ? 48 : 24);
+    }
 
     // We allow empty processes to stick around for at most 30 minutes.
     static final long MAX_EMPTY_TIME = 30*60*1000;
@@ -152,7 +160,7 @@ final class ProcessList {
     // HVGA or smaller phone with less than 512MB.  Values are in KB.
     private final long[] mOomMinFreeLow = new long[] {
             8192, 12288, 16384,
-            24576, 28672, 32768
+            32768, 40960, 65536
     };
     // These are the high-end OOM level limits.  This is appropriate for a
     // 1280x800 or larger screen with around 1GB RAM.  Values are in KB.
