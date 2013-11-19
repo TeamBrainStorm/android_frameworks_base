@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.text.method.AllCapsTransformationMethod;
 import android.text.method.TransformationMethod;
 import android.util.DisplayMetrics;
@@ -43,6 +44,7 @@ import android.widget.Toast;
 public class PlatLogoActivity extends Activity {
     FrameLayout mContent;
     int mCount;
+    private boolean mIsLiquid;
     final Handler mHandler = new Handler();
     static final int BGCOLOR = 0xffed1d24;
 
@@ -84,6 +86,9 @@ public class PlatLogoActivity extends Activity {
         final int p = (int)(4 * metrics.density);
 
         final TextView tv = new TextView(this);
+
+        mIsLiquid = SystemProperties.get("ro.liquid.version") != null;
+
         if (light != null) tv.setTypeface(light);
         tv.setTextSize(30);
         tv.setPadding(p, p, p, p);
@@ -91,6 +96,7 @@ public class PlatLogoActivity extends Activity {
         tv.setGravity(Gravity.CENTER);
         tv.setTransformationMethod(new AllCapsTransformationMethod(this));
         tv.setText("Android " + Build.VERSION.RELEASE);
+        tv.setText((mIsLiquid ? "Liquid Kitkat " : "Android ") + Build.VERSION.RELEASE);
         tv.setVisibility(View.INVISIBLE);
 
         mContent.addView(bg);
