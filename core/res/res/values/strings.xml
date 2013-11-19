@@ -3517,11 +3517,7 @@
     <!-- Title of notification shown when ADB is actively connected to the phone. -->
     <string name="adb_active_notification_title">USB debugging connected</string>
     <!-- Message of notification shown when ADB is actively connected to the phone. -->
-<<<<<<< HEAD
-    <string name="adb_active_notification_message">Touch to disable USB debugging.</string>
-=======
     <string name="adb_active_notification_message">Touch to disable debugging.</string>
->>>>>>> ec58c15... Framework and SystemUI: Refactor CM Additions resources
 
     <!-- Used to replace %s in urls retreived from the signin server with locales.  For Some        -->
     <!-- devices we don't support all the locales we ship to and need to replace the '%s' with a    -->
