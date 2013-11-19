@@ -96,10 +96,6 @@
     <!-- Label for item that opens the profile choosing dialog -->
     <string name="global_action_choose_profile">Profile</string>
 
-    <!-- Hardware Rotation lock string -->
-    <string name="toast_rotation_unlocked">Display rotation unlocked</string>
-    <string name="toast_rotation_locked">Display rotation locked</string>
-
     <!-- Stylus gestures support -->
     <string name="stylus_app_not_installed">%s is not installed</string>
 
@@ -190,5 +186,9 @@
     <string name="animation_grow_shrink_left">Grow in (Left)</string>
     <string name="animation_grow_shrink_right">Grow in (Right)</string>
     <string name="action_null">Blank</string> 
+
+    <!-- Hardware Rotation lock string -->
+    <string name="toast_rotation_unlocked">Display rotation unlocked</string>
+    <string name="toast_rotation_locked">Display rotation locked</string>
 
 </resources>
