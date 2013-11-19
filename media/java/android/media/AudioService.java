@@ -4147,7 +4147,7 @@ public class AudioService extends IAudioService.Stub {
                 mDockState = dockState;
             } else if (action.equals(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED)) {
                 state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE,
-                                           BluetoothProfile.STATE_DISCONNECTED);
+                                               BluetoothProfile.STATE_DISCONNECTED);
                 device = AudioSystem.DEVICE_OUT_BLUETOOTH_SCO;
                 String address = null;
 
