@@ -23,4 +23,7 @@
     <dimen name="notification_shortcuts_spacing_height">88dp</dimen>
     <dimen name="notification_shortcuts_drawer_margin">56dp</dimen>
 
+    <!-- Network stats text size -->
+    <dimen name="network_stats_text_size">9dp</dimen>
+
 </resources>
