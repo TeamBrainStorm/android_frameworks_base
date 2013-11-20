@@ -28,7 +28,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -44,7 +43,6 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.EventLog;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.IWindowManager;
 import android.view.MotionEvent;
@@ -60,6 +58,7 @@ import android.widget.FrameLayout;
 import com.android.internal.util.liquid.ButtonConfig;
 import com.android.internal.util.liquid.ButtonsConstants;
 import com.android.internal.util.liquid.ButtonsHelper;
+import com.android.internal.util.liquid.ColorHelper;
 import com.android.internal.util.liquid.DeviceUtils;
 import com.android.internal.util.liquid.LiquidActions;
 import com.android.internal.widget.multiwaveview.GlowPadView;
@@ -186,6 +185,7 @@ public class SearchPanelView extends FrameLayout implements
         public void onFinishFinalAnimation() {
         }
     }
+
     final GlowPadTriggerListener mGlowPadViewListener = new GlowPadTriggerListener();
 
     private void startAssistActivity() {
@@ -477,8 +477,8 @@ public class SearchPanelView extends FrameLayout implements
                 try {
                     Drawable customIcon;
                     if (iconFile.exists()) {
-                        customIcon = resize(
-                            new BitmapDrawable(getResources(), iconFile.getAbsolutePath()));
+                        customIcon = ColorHelper.resize(mContext,
+                            new BitmapDrawable(getResources(), iconFile.getAbsolutePath()), 50);
                     } else {
                         customIcon = new BitmapDrawable(getResources(),
                                     ColorHelper.getColoredBitmap(ColorHelper.resize(mContext,
@@ -546,7 +546,7 @@ public class SearchPanelView extends FrameLayout implements
             PackageManager pm = mContext.getPackageManager();
             ActivityInfo aInfo = in.resolveActivityInfo(pm, PackageManager.GET_ACTIVITIES);
             return new TargetDrawable(mResources,
-                setStateListDrawable(resize(aInfo.loadIcon(pm))));
+                setStateListDrawable(ColorHelper.resize(mContext, aInfo.loadIcon(pm), 50)));
         } catch (Exception e) {
             return noneDrawable;
         }
@@ -556,9 +556,10 @@ public class SearchPanelView extends FrameLayout implements
         if (activityIcon == null) {
             return null;
         }
-        Drawable iconBg = resize(mResources.getDrawable(R.drawable.ic_navbar_blank));
-        Drawable iconBgActivated =
-            resize(mResources.getDrawable(R.drawable.ic_navbar_blank_activated));
+        Drawable iconBg = ColorHelper.resize(mContext,
+            mResources.getDrawable(R.drawable.ic_navbar_blank), 50);
+        Drawable iconBgActivated = ColorHelper.resize(mContext,
+            mResources.getDrawable(R.drawable.ic_navbar_blank_activated), 50);
         int margin = (int)(iconBg.getIntrinsicHeight() / 3);
         LayerDrawable icon = new LayerDrawable (new Drawable[] {iconBg, activityIcon});
         icon.setLayerInset(1, margin, margin, margin, margin);
@@ -574,15 +575,4 @@ public class SearchPanelView extends FrameLayout implements
             -android.R.attr.state_active, android.R.attr.state_focused}, iconActivated);
         return selector;
     }
-
-    private Drawable resize(Drawable image) {
-        int size = 50;
-        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources()
-                .getDisplayMetrics());
-
-        Bitmap d = ((BitmapDrawable) image).getBitmap();
-        Bitmap bitmapOrig = Bitmap.createScaledBitmap(d, px, px, false);
-        return new BitmapDrawable(mContext.getResources(), bitmapOrig);
-    }
-
 }
