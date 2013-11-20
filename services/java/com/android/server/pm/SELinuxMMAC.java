@@ -57,11 +57,7 @@ public final class SELinuxMMAC {
 
     // Locations of potential install policy files.
     private static final File[] INSTALL_POLICY_FILE = {
-<<<<<<< HEAD
         new File(Environment.getDataDirectory(), "security/mac_permissions.xml"),
-=======
-        new File(Environment.getDataDirectory(), "system/mac_permissions.xml"),
->>>>>>> 0f40dc9... Add seinfo parsing to PackageManagerService.
         new File(Environment.getRootDirectory(), "etc/security/mac_permissions.xml"),
         null};
 
@@ -210,17 +206,10 @@ public final class SELinuxMMAC {
             String tagName = parser.getName();
             if ("seinfo".equals(tagName)) {
                 String seinfoValue = parser.getAttributeValue(null, "value");
-<<<<<<< HEAD
                 if (validateValue(seinfoValue)) {
                     seinfo = seinfoValue;
                 } else {
                     Slog.w(TAG, "<seinfo> without valid value at "
-=======
-                if (seinfoValue != null) {
-                    seinfo = seinfoValue;
-                } else {
-                    Slog.w(TAG, "<seinfo> without value at "
->>>>>>> 0f40dc9... Add seinfo parsing to PackageManagerService.
                            + parser.getPositionDescription());
                 }
             }
@@ -230,7 +219,6 @@ public final class SELinuxMMAC {
     }
 
     /**
-<<<<<<< HEAD
      * General validation routine for tag values.
      * Returns a boolean indicating if the passed string
      * contains only letters or underscores.
@@ -253,8 +241,6 @@ public final class SELinuxMMAC {
     }
 
     /**
-=======
->>>>>>> 0f40dc9... Add seinfo parsing to PackageManagerService.
      * Labels a package based on an seinfo tag from install policy.
      * The label is attached to the ApplicationInfo instance of the package.
      * @param PackageParser.Package object representing the package
