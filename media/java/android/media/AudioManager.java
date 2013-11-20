@@ -43,6 +43,8 @@ import android.view.VolumePanel;
 
 import java.util.HashMap;
 
+import com.android.internal.util.liquid.QuietHoursUtils;
+
 /**
  * AudioManager provides access to volume and ringer mode control.
  * <p>
@@ -1791,6 +1793,10 @@ public class AudioManager {
             return;
         }
 
+        if (QuietHoursUtils.inQuietHours(mContext, Settings.System.QUIET_HOURS_SYSTEM)) {
+            return;
+        }
+
         if (!querySoundEffectsEnabled()) {
             return;
         }
@@ -2776,5 +2782,4 @@ public class AudioManager {
     public int getOutputLatency(int streamType) {
         return AudioSystem.getOutputLatency(streamType);
     }
-
 }
