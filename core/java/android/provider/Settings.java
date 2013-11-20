@@ -2046,7 +2046,7 @@ public final class Settings {
          * Whether to prevent loud volume levels when headset is first plugged in.
          * @hide
          */
-        public static final String SAFE_HEADSET_VOLUME_RESTORE = "safe_headset_volume_restore";
+        public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
         /**
          * Master volume (float in the range 0.0f to 1.0f).
@@ -2109,17 +2109,14 @@ public final class Settings {
          * @hide
          */
         public static final int BLACKLIST_DO_NOT_BLOCK = 0;
-
         /**
          * @hide
          */
         public static final int BLACKLIST_BLOCK = 1;
-
         /**
          * @hide
          */
         public static final int BLACKLIST_PHONE_SHIFT = 0;
-
         /**
          * @hide
          */
@@ -2828,6 +2825,7 @@ public final class Settings {
 
         /**
          * Whether to hide the notification screen after clicking on a widget
+         * button
          *
          * @hide
          */
@@ -2904,7 +2902,7 @@ public final class Settings {
          */
         public static final String COMBINED_BAR_AUTO_HIDE = "combined_bar_auto_hide";
 
-	/**
+	    /**
          * Sets the portrait background of notification drawer
          * @hide
          */
@@ -2928,7 +2926,7 @@ public final class Settings {
          */
         public static final String NOTIF_ALPHA = "notif_alpha";
 
-	/**
+	    /**
          * Whether to show the network status in the status bar
          * @hide
          */
@@ -2940,13 +2938,13 @@ public final class Settings {
          */
         public static final String STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL = "status_bar_network_stats_update_frequency";
 
-	/**
+	    /**
          * Network stats Color style
          * @hide
          */
         public static final String STATUS_BAR_NETWORK_COLOR = "status_bar_network_usage_color"; 
 
-	/**
+	    /**
          * Network stats hide if there's no traffic
          * @hide
          */
@@ -2992,6 +2990,13 @@ public final class Settings {
          */
         public static final String STATUS_BAR_SIGNAL_TEXT = "status_bar_signal";
 
+         /**
+         * Whether to control brightness from status bar
+         *
+         * @hide
+         */
+        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+
         /**
          * Whether to show the IME switcher in the status bar
          * @hide
@@ -3027,7 +3032,7 @@ public final class Settings {
 
         /**
          * Boolean value whether to link ringtone and notification volumes
-         * 
+         *
          * @hide
          */
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
@@ -3291,13 +3296,6 @@ public final class Settings {
                 "status_bar_circle_battery_animationspeed";
 
         /**
-         * Whether to control brightness from status bar
-         *
-         * @hide
-         */
-        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-
-        /**
          * toggle to "fix" the following: (found in NotificationManagerService)
          * new in 4.2: if there was supposed to be a sound and we're in vibrate mode,
          * we always vibrate, even if no vibration was specified
@@ -3312,7 +3310,7 @@ public final class Settings {
          * 2 = disabled
          * @hide
          */
-         public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
+        public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
 
         /**
          * Navigation bar button color
@@ -3339,11 +3337,11 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
 
-	/**  
+	    /**
          * Custom System Animations
-   	 *  
+   	     *
          * @hide
-         */  
+         */
         public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {  
                 "activity_open",
                 "activity_close",
@@ -3572,7 +3570,7 @@ public final class Settings {
          */
         public static final String UI_FORCE_OVERFLOW_BUTTON = "ui_force_overflow_button";
 
-	/**
+	    /**
          * whether which Ram Usage Bar mode is used on recent switcher
          * 0 = none, 1 = only app use, 2 = app and cache use, 3 = app, cache and system use
          * @hide
@@ -3607,7 +3605,7 @@ public final class Settings {
          */
         public static final String POWER_MENU_CONFIG = "power_menu_config";
 
-	/**
+	    /**
          * Text color for advanced power menu
          *
          * @hide
@@ -3714,7 +3712,7 @@ public final class Settings {
             PHONE_BLACKLIST_NOTIFY_ENABLED,
             PHONE_BLACKLIST_PRIVATE_NUMBER_MODE,
             PHONE_BLACKLIST_UNKNOWN_NUMBER_MODE,
-            PHONE_BLACKLIST_REGEX_ENABLED
+            PHONE_BLACKLIST_REGEX_ENABLED,
         };
 
         // Settings moved to Settings.Secure
@@ -6095,13 +6093,6 @@ public final class Settings {
          */
         public static final String WIRELESS_CHARGING_STARTED_SOUND =
                 "wireless_charging_started_sound";
-
-        /**
-         * Whether to allow killing of the foreground app by long-pressing the Back button
-         * @hide
-         */
-        public static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
-
 
         /**
          * Whether we keep the device on while the device is plugged in.
