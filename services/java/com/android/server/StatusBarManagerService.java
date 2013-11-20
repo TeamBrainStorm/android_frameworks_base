@@ -711,5 +711,4 @@ public class StatusBarManagerService extends IStatusBarService.Stub
             */
         }
     };
-
 }
