@@ -1076,7 +1076,7 @@ public class LocationManagerService extends ILocationManager.Stub {
     public List<String> getProviders(Criteria criteria, boolean enabledOnly) {
         int allowedResolutionLevel = getCallerAllowedResolutionLevel();
         ArrayList<String> out;
-        int uid = Binder.getCallingUid();;
+        int uid = Binder.getCallingUid();
         long identity = Binder.clearCallingIdentity();
         try {
             synchronized (mLock) {
@@ -1730,7 +1730,6 @@ public class LocationManagerService extends ILocationManager.Stub {
         } finally {
             Binder.restoreCallingIdentity(ident);
         }
-
         try {
             mGpsStatusProvider.addGpsStatusListener(listener);
         } catch (RemoteException e) {
