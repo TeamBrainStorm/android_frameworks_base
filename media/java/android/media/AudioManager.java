@@ -44,9 +44,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.VolumePanel;
 
+import java.util.Calendar;
 import java.util.HashMap;
-
-import com.android.internal.util.liquid.QuietHoursUtils;
 
 /**
  * AudioManager provides access to volume and ringer mode control.
@@ -1796,7 +1795,7 @@ public class AudioManager {
             return;
         }
 
-        if (QuietHoursUtils.inQuietHours(mContext, Settings.System.QUIET_HOURS_SYSTEM)) {
+        if (inQuietHours()) {
             return;
         }
 
@@ -1842,6 +1841,29 @@ public class AudioManager {
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in playSoundEffect"+e);
         }
+    }
+
+    public boolean inQuietHours() {
+        boolean quietHoursEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_ENABLED, 0) != 0;
+        int quietHoursStart = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_START, 0);
+        int quietHoursEnd = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_END, 0);
+        boolean quietHoursSystem = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_SYSTEM, 0) != 0;
+        if (quietHoursEnabled && quietHoursSystem && (quietHoursStart != quietHoursEnd)) {
+            // Get the date in "quiet hours" format.
+            Calendar calendar = Calendar.getInstance();
+            int minutes = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
+            if (quietHoursEnd < quietHoursStart) {
+                // Starts at night, ends in the morning.
+                return (minutes > quietHoursStart) || (minutes < quietHoursEnd);
+            } else {
+                return (minutes > quietHoursStart) && (minutes < quietHoursEnd);
+            }
+        }
+        return false;
     }
 
     /**
