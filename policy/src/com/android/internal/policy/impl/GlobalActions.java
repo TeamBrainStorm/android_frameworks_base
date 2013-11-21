@@ -107,7 +107,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     private MyAdapter mAdapter;
 
-    private boolean mKeyguardLocked = false;
+    private boolean mKeyguardShowing = false;
     private boolean mDeviceProvisioned = false;
     private ToggleAction.State mAirplaneState = ToggleAction.State.Off;
     private boolean mIsWaitingForEcmExit = false;
@@ -153,10 +153,10 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     /**
      * Show the global actions dialog (creating if necessary)
-     * @param keyguardLocked True if keyguard is locked
+     * @param keyguardShowing True if keyguard is showing
      */
-    public void showDialog(boolean keyguardLocked, boolean isDeviceProvisioned) {
-        mKeyguardLocked = keyguardLocked;
+    public void showDialog(boolean keyguardShowing, boolean isDeviceProvisioned) {
+        mKeyguardShowing = keyguardShowing;
         mDeviceProvisioned = isDeviceProvisioned;
         if (mDialog != null) {
             mDialog.dismiss();
@@ -217,10 +217,11 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         } else {
             mSilentModeAction = new SilentModeTriStateAction(mContext, mAudioManager, mHandler);
         }
-
         mItems = new ArrayList<Action>();
 
-        // next: profile
+	final ContentResolver cr = mContext.getContentResolver();
+
+	    // next: profile
         // only shown if both system profiles and the menu item is enabled, enabled by default
         boolean showProfiles =
                 Settings.System.getIntForUser(cr,
@@ -514,46 +515,36 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         }
     }
 
-    private void createProfileDialog(){
-        final ProfileManager profileManager = (ProfileManager)mContext.getSystemService(Context.PROFILE_SERVICE);
+    private void createProfileDialog() {
+        final ProfileManager profileManager = (ProfileManager) mContext
+                .getSystemService(Context.PROFILE_SERVICE);
 
         final Profile[] profiles = profileManager.getProfiles();
         UUID activeProfile = profileManager.getActiveProfile().getUuid();
         final CharSequence[] names = new CharSequence[profiles.length];
 
-        int i=0;
+        int i = 0;
         int checkedItem = 0;
 
-        for(Profile profile : profiles) {
-            if(profile.getUuid().equals(activeProfile)) {
+        for (Profile profile : profiles) {
+            if (profile.getUuid().equals(activeProfile)) {
                 checkedItem = i;
                 mChosenProfile = profile;
             }
-            names[i++] = profile.getName();
+           names[i++] = profile.getName();
         }
 
-        final AlertDialog.Builder ab = new AlertDialog.Builder(getUiContext());
+        final AlertDialog.Builder ab = new AlertDialog.Builder(mContext);
 
-        AlertDialog dialog = ab
-                .setTitle(R.string.global_action_choose_profile)
-                .setSingleChoiceItems(names, checkedItem, new DialogInterface.OnClickListener() {
+        AlertDialog dialog = ab.setSingleChoiceItems(names, checkedItem,
+                new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (which < 0)
                             return;
                         mChosenProfile = profiles[which];
+                        profileManager.setActiveProfile(mChosenProfile.getUuid());
+                        dialog.cancel();
                     }
-                })
-                .setPositiveButton(com.android.internal.R.string.yes,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                profileManager.setActiveProfile(mChosenProfile.getUuid());
-                            }
-                        })
-                .setNegativeButton(com.android.internal.R.string.no,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
                 }).create();
         dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
         dialog.show();
@@ -607,7 +598,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     /**
      * The adapter used for the list within the global actions dialog, taking
      * into account whether the keyguard is showing via
-     * {@link GlobalActions#mKeyguardLocked} and whether the device is provisioned
+     * {@link GlobalActions#mKeyguardShowing} and whether the device is provisioned
      * via {@link GlobalActions#mDeviceProvisioned}.
      */
     private class MyAdapter extends BaseAdapter {
@@ -618,7 +609,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             for (int i = 0; i < mItems.size(); i++) {
                 final Action action = mItems.get(i);
 
-                if (mKeyguardLocked && !action.showDuringKeyguard()) {
+                if (mKeyguardShowing && !action.showDuringKeyguard()) {
                     continue;
                 }
                 if (!mDeviceProvisioned && !action.showBeforeProvisioning()) {
@@ -644,7 +635,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             int filteredPos = 0;
             for (int i = 0; i < mItems.size(); i++) {
                 final Action action = mItems.get(i);
-                if (mKeyguardLocked && !action.showDuringKeyguard()) {
+                if (mKeyguardShowing && !action.showDuringKeyguard()) {
                     continue;
                 }
                 if (!mDeviceProvisioned && !action.showBeforeProvisioning()) {
@@ -659,7 +650,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             throw new IllegalArgumentException("position " + position
                     + " out of range of showable actions"
                     + ", filtered count=" + getCount()
-                    + ", keyguardlocked=" + mKeyguardLocked
+                    + ", keyguardshowing=" + mKeyguardShowing
                     + ", provisioned=" + mDeviceProvisioned);
         }
 
