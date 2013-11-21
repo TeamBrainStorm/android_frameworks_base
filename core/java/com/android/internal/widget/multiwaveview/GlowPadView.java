@@ -696,6 +696,14 @@ public class GlowPadView extends View {
         return mDirectionDescriptionsResourceId;
     }
 
+    public boolean getMagneticTargets() {
+        return mMagneticTargets;
+    }
+
+    public void setMagneticTargets(boolean enabled) {
+        mMagneticTargets = enabled;
+    }
+
     /**
      * Enable or disable vibrate on touch.
      *
@@ -1277,7 +1285,7 @@ public class GlowPadView extends View {
 
     private String getTargetDescription(int index) {
         if (mTargetDescriptions == null || mTargetDescriptions.isEmpty()
-            || index >= mTargetDescriptions.size()) {
+                || index >= mTargetDescriptions.size()) {
             mTargetDescriptions = loadDescriptions(mTargetDescriptionsResourceId);
             if (mTargetDrawables.size() != mTargetDescriptions.size()) {
                 if (DEBUG) Log.v(TAG, "The number of target drawables must be"
@@ -1290,7 +1298,7 @@ public class GlowPadView extends View {
 
     private String getDirectionDescription(int index) {
         if (mDirectionDescriptions == null || mDirectionDescriptions.isEmpty()
-            || index >= mDirectionDescriptions.size()) {
+                || index >= mDirectionDescriptions.size()) {
             mDirectionDescriptions = loadDescriptions(mDirectionDescriptionsResourceId);
             if (mTargetDrawables.size() != mDirectionDescriptions.size()) {
                 if (DEBUG) Log.v(TAG, "The number of target drawables must be"
