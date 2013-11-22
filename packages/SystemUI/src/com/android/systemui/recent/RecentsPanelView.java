@@ -115,7 +115,6 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
 
     MemInfoReader mMemInfoReader = new MemInfoReader();
    
-
     public static interface RecentsScrollView {
         public int numItemsInOneScreenful();
         public void setAdapter(TaskDescriptionAdapter adapter);
@@ -363,7 +362,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
                     && (mRecentTaskDescriptions.size() == 0);
             mRecentsNoApps.setAlpha(1f);
             mRecentsNoApps.setVisibility(noApps ? View.VISIBLE : View.INVISIBLE);
-	    mClearRecents.setVisibility(noApps ? View.GONE : View.VISIBLE);
+	        mClearRecents.setVisibility(noApps ? View.GONE : View.VISIBLE);
 
             onAnimationEnd(null);
             setFocusable(true);
@@ -470,7 +469,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
 
         mRecentsScrim = findViewById(R.id.recents_bg_protect);
         mRecentsNoApps = findViewById(R.id.recents_no_apps);
-	//mRecentsRamBar = findViewById(R.id.recents_ram_bar);
+	    //mRecentsRamBar = findViewById(R.id.recents_ram_bar);
 
         mClearRecents = (ImageView) findViewById(R.id.recents_clear);
         if (mClearRecents != null){
@@ -491,7 +490,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
                 ((BitmapDrawable) mRecentsScrim.getBackground()).setTileModeY(TileMode.REPEAT);
             }
         }
-	updateRamBar();
+	    updateRamBar();
     }
 
     public void setMinSwipeAlpha(float minAlpha) {
@@ -618,7 +617,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
             mRecentTasksLoader.cancelLoadingThumbnailsAndIcons(this);
             onTaskLoadingCancelled();
         }
-	updateRamBar();
+	    updateRamBar();
     }
 
     public void onTaskLoadingCancelled() {
@@ -627,14 +626,14 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
             mRecentTaskDescriptions = null;
             mListAdapter.notifyDataSetInvalidated();
         }
-	updateRamBar();
+	    updateRamBar();
     }
 
     public void refreshViews() {
         mListAdapter.notifyDataSetInvalidated();
         updateUiElements();
         showIfReady();
-	updateRamBar();
+	    updateRamBar();
     }
 
     public void refreshRecentTasksList() {
@@ -775,7 +774,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
             sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
             setContentDescription(null);
         }
-	updateRamBar();
+	    updateRamBar();
     }
 
     private void startApplicationDetailsActivity(String packageName) {
