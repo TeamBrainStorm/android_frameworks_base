@@ -45,6 +45,7 @@ import android.view.InputDevice;
 import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IBatteryStats;
 
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -52,6 +53,7 @@ import java.util.ListIterator;
 
 public class VibratorService extends IVibratorService.Stub
         implements InputManager.InputDeviceListener {
+
     private static final String TAG = "VibratorService";
 
     private final LinkedList<Vibration> mVibrations;
@@ -197,6 +199,17 @@ public class VibratorService extends IVibratorService.Stub
         return doVibratorExists();
     }
 
+    private void verifyIncomingUid(int uid) {
+        if (uid == Binder.getCallingUid()) {
+            return;
+        }
+        if (Binder.getCallingPid() == Process.myPid()) {
+            return;
+        }
+        mContext.enforcePermission(android.Manifest.permission.UPDATE_APP_OPS_STATS,
+                Binder.getCallingPid(), Binder.getCallingUid(), null);
+    }
+
     private boolean inQuietHours() {
         boolean quietHoursEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.QUIET_HOURS_ENABLED, 0, UserHandle.USER_CURRENT_OR_SELF) != 0;
@@ -218,17 +231,6 @@ public class VibratorService extends IVibratorService.Stub
             }
         }
         return false;
-    }
-
-    private void verifyIncomingUid(int uid) {
-        if (uid == Binder.getCallingUid()) {
-            return;
-        }
-        if (Binder.getCallingPid() == Process.myPid()) {
-            return;
-        }
-        mContext.enforcePermission(android.Manifest.permission.UPDATE_APP_OPS_STATS,
-                Binder.getCallingPid(), Binder.getCallingUid(), null);
     }
 
     public void vibrate(int uid, String packageName, long millis, IBinder token) {
