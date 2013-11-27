@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -3563,22 +3564,10 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         initVelocityTrackerIfNotExists();
         mVelocityTracker.addMovement(ev);
 
-        switch (action & MotionEvent.ACTION_MASK) {
-        case MotionEvent.ACTION_DOWN: {
-        mIsTap = true;
-        mInverse.sendEmptyMessageDelayed(0, 100);
-            switch (mTouchMode) {
-            case TOUCH_MODE_OVERFLING: {
-                mFlingRunnable.endFling();
-                if (mPositionScroller != null) {
-                    mPositionScroller.stop();
-                }
-                mTouchMode = TOUCH_MODE_OVERSCROLL;
-                mMotionX = (int) ev.getX();
-                mMotionY = mLastY = (int) ev.getY();
-                mMotionCorrection = 0;
-                mActivePointerId = ev.getPointerId(0);
-                mDirection = 0;
+        final int actionMasked = ev.getActionMasked();
+        switch (actionMasked) {
+            case MotionEvent.ACTION_DOWN: {
+                onTouchDown(ev);
                 break;
             }
 
@@ -3638,8 +3627,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     private void onTouchDown(MotionEvent ev) {
+        mIsTap = true;
         mActivePointerId = ev.getPointerId(0);
-
+        mInverse.sendEmptyMessageDelayed(0,100);
         if (mTouchMode == TOUCH_MODE_OVERFLING) {
             // Stopped the fling. It is a scroll.
             mFlingRunnable.endFling();
@@ -4348,8 +4338,9 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
             removeCallbacks(mCheckFlywheel);
 
             reportScrollStateChange(OnScrollListener.SCROLL_STATE_IDLE);
-            if (clearCache)
+            if (clearCache) {
                 clearScrollingCache();
+            }
             mScroller.abortAnimation();
 
             if (mFlingStrictSpan != null) {
@@ -6170,7 +6161,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
                 dismissPopup();
             }
         }
-
     }
 
     /**
@@ -6978,7 +6968,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
                     }
                 }
             }
-
             pruneScrapViews();
         }
 
