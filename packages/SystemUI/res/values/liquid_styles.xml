@@ -25,7 +25,7 @@
 	<item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">@dimen/network_stats_text_size</item>
         <item name="android:textColor">#ffffff</item>
-    </style> 
+    </style>
 
     <!-- Custom battery -->
     <style name="TextAppearance.StatusBar.Battery" parent="@*android:style/TextAppearance.StatusBar.Icon">
