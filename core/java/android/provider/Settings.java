@@ -2951,36 +2951,6 @@ public final class Settings {
         public static final String STATUS_BAR_NETWORK_HIDE = "status_bar_network_hide";  
 
         /**
-         * Display style of AM/PM next to clock in status bar
-         * 0: Normal display (Eclair stock)
-         * 1: Small display (Froyo stock)
-         * 2: No display (Gingerbread/ICS stock)
-         * default: 2
-         * @hide
-         */
-        public static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
-
-        /**
-         * Display style of the status bar battery information
-         * 0: Display the stock battery information
-         * 1: Display cm battery percentage implementation / dont show stock icon
-         * 2: Hide the battery information
-         * default: 0
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY = "status_bar_battery";
-
-        /**
-         * Whether to show the clock in status bar
-         * of the stock battery icon
-         * 0: don't show the clock
-         * 1: show the clock
-         * default: 1
-         * @hide
-         */
-        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
-
-        /**
          * Whether to show the signal text or signal bars.
          * default: 0
          * 0: show signal bars
@@ -2990,7 +2960,7 @@ public final class Settings {
          */
         public static final String STATUS_BAR_SIGNAL_TEXT = "status_bar_signal";
 
-         /**
+        /**
          * Whether to control brightness from status bar
          *
          * @hide
@@ -2998,10 +2968,10 @@ public final class Settings {
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
         /**
-         * Whether to show the IME switcher in the status bar
+         * Whether fcharge is enabled or not if kernel supports it
          * @hide
          */
-        public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
+        public static final String FCHARGE_ENABLED = "fcharge_enabled";
 
         /**
          * Whether to use a separate delay for "slide to unlock" and security
@@ -3029,13 +2999,6 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
-
-        /**
-         * Boolean value whether to link ringtone and notification volumes
-         *
-         * @hide
-         */
-        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
          * Whether to unlock the menu key.  The value is boolean (1 or 0).
@@ -3198,22 +3161,10 @@ public final class Settings {
         public static final String SWAP_VOLUME_KEYS_ON_ROTATION = "swap_volume_keys_on_rotation";
 
         /**
-         * Volume rocker wake
-         * @hide
-         */
-        public static final String VOLUME_WAKE_SCREEN = "volume_wake_screen";
-
-        /**
          * Volume music controls
          * @hide
          */
         public static final String VOLUME_MUSIC_CONTROLS = "volume_music_controls";
-
-        /**
-         * Whether to prevent loud volume levels when headset is first plugged in.
-         * @hide
-         */
-        public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
         /**
          * Electronic beam animation mode
@@ -3224,6 +3175,12 @@ public final class Settings {
          * @hide
          */
         public static final String SYSTEM_POWER_CRT_MODE = "system_power_crt_mode";
+
+        /**
+         * Swap volume buttons when the screen is rotated by 90 or 180 degrees
+         * @hide
+         */
+        public static final String SWAP_VOLUME_KEYS_BY_ROTATE = "swap_volume_keys_by_rotate";
 
         /**
          * Volume keys control cursor in text fields (default is 0)
@@ -3337,25 +3294,11 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
 
-	    /**
-         * Custom System Animations
-   	     *
+        /**
+         * Wether navigation bar is on landscape on the bottom or on the right
          * @hide
          */
-        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {  
-                "activity_open",
-                "activity_close",
-                "task_open",  
-                "task_close",  
-                "task_to_front",
-                "task_to_back",  
-                "wallpaper_open",  
-                "wallpaper_close",  
-                "wallpaper_intra_open",  
-                "wallpaper_intra_close",  
-        };  
-        public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
-        public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
+        public static final String NAVIGATION_BAR_CAN_MOVE = "navigation_bar_can_move";
 
         /**
          * Navigation bar height when it is on protrait
@@ -3438,6 +3381,12 @@ public final class Settings {
         public static final String NOTIFICATION_SHORTCUTS_COLOR_MODE = "notification_shortcuts_color_mode";
 
         /**
+         * How long to wait between playing notification sounds from a package
+         * @hide
+         */
+        public static final String MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD = "mute_annoying_notifications_threshold";
+
+        /**
          * Weather to minimize lockscreen challenge on screen turned on
          * @hide
          */
@@ -3472,7 +3421,7 @@ public final class Settings {
          */
         public static final String LISTVIEW_INTERPOLATOR = "listview_interpolator";
 
-	/**
+	    /**
          * Alt Activity Resolver Grid
          * @hide
          */
@@ -3625,6 +3574,32 @@ public final class Settings {
          * @hide
          */
         public static final String POWER_MENU_ICON_COLOR_MODE = "power_menu_icon_color_mode";
+
+	    /**
+         * Custom System Animations
+   	     *
+         * @hide
+         */
+        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {  
+                "activity_open",
+                "activity_close",
+                "task_open",  
+                "task_close",  
+                "task_to_front",
+                "task_to_back",  
+                "wallpaper_open",  
+                "wallpaper_close",  
+                "wallpaper_intra_open",  
+                "wallpaper_intra_close",  
+        };  
+        public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
+        public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
+
+        /**
+         * Adjust the vibration multiplier to control vibration strength
+         * @hide
+         */
+        public static final String VIBRATION_MULTIPLIER = "vibration_multiplier";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
