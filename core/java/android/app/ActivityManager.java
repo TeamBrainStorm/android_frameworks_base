@@ -24,6 +24,7 @@ import com.android.internal.app.ProcessStats;
 import com.android.internal.os.PkgUsageStats;
 import com.android.internal.os.TransferPipe;
 import com.android.internal.util.FastPrintWriter;
+import com.android.internal.util.MemInfoReader;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,6 +37,9 @@ import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.DisplayManagerGlobal;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Debug;
@@ -51,6 +55,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Slog;
+import android.view.Display;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -446,7 +451,6 @@ public class ActivityManager {
      * off certain features that require more RAM.
      */
     static public boolean isHighEndGfx() {
-
         if (totalSize == 0) {
             MemInfoReader reader = new MemInfoReader();
 			reader.readMemInfo();
@@ -474,20 +478,34 @@ public class ActivityManager {
     }
 
     /**
+     * Returns true if this is a low-RAM device.  Exactly whether a device is low-RAM
+     * is ultimately up to the device configuration, but currently it generally means
+     * something in the class of a 512MB device with about a 800x480 or less screen.
+     * This is mostly intended to be used by apps to determine whether they should turn
+     * off certain features that require more RAM.
+     */
+    public boolean isLowRamDevice() {
+        return isLowRamDeviceStatic();
+    }
+
+    /** @hide */
+    public static boolean isLowRamDeviceStatic() {
+        return "true".equals(SystemProperties.get("ro.config.low_ram", "false"));
+    }
+
+    /**
      * Used by persistent processes to determine if they are running on a
      * higher-end device so should be okay using hardware drawing acceleration
      * (which tends to consume a lot more RAM).
      * @hide
      */
     static public boolean isLargeRAM() {
-
         if (memSize == 0) {
             MemInfoReader reader = new MemInfoReader();
             reader.readMemInfo();
             memSize = reader.getTotalSize();
             reader = null;
 		}
-
 
         if (memSize >= (640*1024*1024)) {
             // Currently 640MB RAM available to the kernel is the point at
