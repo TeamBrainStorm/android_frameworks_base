@@ -20,6 +20,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.app.ActivityManagerNative;
 import android.app.IProfileManager;
 import android.app.NotificationGroup;
 import android.app.Profile;
@@ -33,6 +34,7 @@ import android.content.IntentFilter;
 import android.content.res.XmlResourceParser;
 import android.os.Environment;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.os.ParcelUuid;
