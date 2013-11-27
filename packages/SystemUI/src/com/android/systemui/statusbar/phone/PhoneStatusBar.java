@@ -798,7 +798,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
 
         mTicker = new MyTicker(context, mStatusBarView);
 
-
         TickerView tickerView = (TickerView)mStatusBarView.findViewById(R.id.tickerText);
         tickerView.mTicker = mTicker;
 
@@ -923,7 +922,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
         mCloseViewHeight = res.getDimensionPixelSize(R.dimen.close_handle_height);
         updateCarrierMargin(false);
 
-	// Set notification background
+	    // set notification background
         setNotificationWallpaperHelper();
 
         // Quick Settings (where available, some restrictions apply)
@@ -973,10 +972,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
                 mQS.setup(mNetworkController, mBluetoothController, mBatteryController,
                         mLocationController, mRotationLockController);
 
-		// Start observing for changes
+		        // Start observing for changes
                 mTilesChangedObserver = new TilesChangedObserver(mHandler);
                 mTilesChangedObserver.startObserving();		
-
             } else {
                 mQS = null; // fly away, be free
             }
@@ -1052,7 +1050,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
     }
 
     void onBarViewDetached() {
-     //   WindowManagerImpl.getDefault().removeView(mStatusBarWindow);
+        // WindowManagerImpl.getDefault().removeView(mStatusBarWindow);
     }
 
     @Override
@@ -1217,7 +1215,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
             // Nevermind, this will be re-created
             return;
         }
-
         prepareNavigationBarView();
 
         mWindowManager.addView(mNavigationBarView, getNavigationBarLayoutParams());
@@ -1480,7 +1477,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
             mPile.removeView(remove);
         }
 
-	//set alpha for notification pile before it is added
+	    //set alpha for notification pile before it is added
         setNotificationAlphaHelper(); 
 
         for (int i=0; i<toShow.size(); i++) {
@@ -2947,6 +2944,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
     private void addStatusBarWindow() {
         // Put up the view
         final int height = getStatusBarHeight();
+
         // Now that the status bar window encompasses the sliding panel and its
         // translucent backdrop, the entire thing is made TRANSLUCENT and is
         // hardware-accelerated.
@@ -3362,7 +3360,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
             mCurrentTheme = (CustomTheme)newTheme.clone();
             recreateStatusBar();
         } else {
-
             if (mClearButton instanceof TextView) {
                 ((TextView)mClearButton).setText(context.getText(R.string.status_bar_clear_all_button));
             }
@@ -3667,5 +3664,4 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
             ((DemoMode)v).dispatchDemoCommand(command, args);
         }
     }
-
 }
