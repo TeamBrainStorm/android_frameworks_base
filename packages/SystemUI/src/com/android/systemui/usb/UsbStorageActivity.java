@@ -325,5 +325,4 @@ public class UsbStorageActivity extends Activity
     public void onCancel(DialogInterface dialog) {
         finish();
     }
-
 }

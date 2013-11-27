@@ -278,5 +278,4 @@ public class PhoneStatusBarView extends PanelBar {
             }
         }
     }
-
 }
