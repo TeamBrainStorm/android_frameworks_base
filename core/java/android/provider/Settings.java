@@ -3118,12 +3118,6 @@ public final class Settings {
         public static final String SCREEN_LOCK_SLIDE_SCREENOFF_DELAY = "screen_lock_slide_screenoff_delay";
 
         /**
-         * Whether to use the custom quick unlock screen control
-         * @hide
-         */
-        public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
-
-        /**
          * Whether to unlock the menu key.  The value is boolean (1 or 0).
          * @hide
          */
@@ -4852,13 +4846,6 @@ public final class Settings {
         public static final String LOCK_SCREEN_OWNER_INFO_ENABLED =
             "lock_screen_owner_info_enabled";
 
-        /**
-         * Whether the unsecure widget screen will be shown before a secure
-         * lock screen
-         * @hide
-         */
-        public static final String LOCK_BEFORE_UNLOCK =
-            "lock_before_unlock";
         /**
          * The Logging ID (a unique 64-bit value) as a hex string.
          * Used as a pseudonymous identifier for logging.
