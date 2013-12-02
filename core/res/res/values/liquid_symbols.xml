@@ -63,7 +63,7 @@
   <java-symbol type="id" name="icon2" />
   <java-symbol type="id" name="icon3" />
 
-  <!-- Power widget -->
+  <!-- Power widget & Quick settings -->
   <java-symbol type="string" name="hour" />
   <java-symbol type="string" name="hours" />
   <java-symbol type="string" name="minute" />

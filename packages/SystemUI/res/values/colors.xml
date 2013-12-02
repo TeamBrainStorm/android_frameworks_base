@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 -->
+
 <resources>
 
     <drawable name="notification_number_text_color">#ff000000</drawable>
