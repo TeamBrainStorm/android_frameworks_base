@@ -1423,6 +1423,9 @@ public class NotificationManagerService extends INotificationManager.Stub
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QUIET_HOURS_DIM),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -2029,7 +2032,7 @@ public class NotificationManagerService extends INotificationManager.Stub
 
                     final boolean alertsDisabled =
                         (mDisabledNotifications & StatusBarManager.DISABLE_NOTIFICATION_ALERTS) != 0;
-                    boolean readyForAlerts = canInterrupt && mSystemReady &&
+                    boolean readyForAlerts = (canInterrupt && mSystemReady && !notificationIsAnnoying(pkg)) &&
                         (r.getUserId() == UserHandle.USER_ALL || r.getUserId() == userId && r.getUserId() == currentUser) &&
                         (old == null || (notification.flags & Notification.FLAG_ONLY_ALERT_ONCE) == 0);
                     boolean hasValidSound = false;
