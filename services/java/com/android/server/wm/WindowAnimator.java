@@ -567,8 +567,9 @@ public class WindowAnimator {
             mService.requestTraversalLocked();
         }
 
-        if (!mAnimating && wasAnimating) {
-            mPolicy.windowAnimationFinished();
+        if (mAnimating) {
+            mService.scheduleAnimationLocked();
+        } else if (wasAnimating) {
             mService.requestTraversalLocked();
         }
         if (WindowManagerService.DEBUG_WINDOW_TRACE) {
