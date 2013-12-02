@@ -1220,7 +1220,7 @@ public class NotificationManagerService extends INotificationManager.Stub
             boolean cancelNotifications = true;
 
 	        boolean ScreenOnNotificationLed = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1; 
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 1) == 1; 
             
             if (action.equals(Intent.ACTION_PACKAGE_ADDED)
                     || (queryRemove=action.equals(Intent.ACTION_PACKAGE_REMOVED))
@@ -2468,7 +2468,7 @@ public class NotificationManagerService extends INotificationManager.Stub
     private void updateLightsLocked() {
 
         boolean ScreenOnNotificationLed = Settings.System.getInt(mContext.getContentResolver(),
-            Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1;
+            Settings.System.SCREEN_ON_NOTIFICATION_LED, 1) == 1;
 
         // handle notification lights
         if (mLedNotification == null) {
