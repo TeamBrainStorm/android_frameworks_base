@@ -15,8 +15,6 @@
 
 package com.android.server;
 
-import android.provider.Settings.SettingNotFoundException;
-
 import com.android.internal.app.ThemeUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.inputmethod.InputMethodUtils;
