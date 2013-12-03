@@ -119,9 +119,10 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private boolean mIsWaitingForEcmExit = false;
     private boolean mHasTelephony;
     private boolean mHasVibrator;
-    private static int mTextColor;
     private Profile mChosenProfile;
     private final boolean mShowSilentToggle;
+
+    private static int mTextColor;
 
     /**
      * @param context everything needs a context :(
@@ -140,7 +141,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         filter.addAction(TelephonyIntents.ACTION_EMERGENCY_CALLBACK_MODE_CHANGED);
         context.registerReceiver(mBroadcastReceiver, filter);
 
-	ThemeUtils.registerThemeChangeReceiver(context, mThemeChangeReceiver);
+	    ThemeUtils.registerThemeChangeReceiver(context, mThemeChangeReceiver);
 
         // get notified of phone state changes
         TelephonyManager telephonyManager =
@@ -167,16 +168,16 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mKeyguardShowing = keyguardShowing;
         mDeviceProvisioned = isDeviceProvisioned;
         if (mDialog != null) {
-	    if (mUiContext != null) {
+	        if (mUiContext != null) {
                 mUiContext = null;
             }
             mDialog.dismiss();
             mDialog = null;
-	    mDialog = createDialog();
+	        mDialog = createDialog();
             // Show delayed, so that the dismiss of the previous dialog completes
             mHandler.sendEmptyMessage(MESSAGE_SHOW);
         } else {
-	    mDialog = createDialog();
+	        mDialog = createDialog();
             handleShow();
         }
     }
@@ -239,7 +240,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         }
         mItems = new ArrayList<Action>();
 
-	final ContentResolver cr = mContext.getContentResolver();
+	    final ContentResolver cr = mContext.getContentResolver();
 
 	    // next: profile
         // only shown if both system profiles and the menu item is enabled, enabled by default
