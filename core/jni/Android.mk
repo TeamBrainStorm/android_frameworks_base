@@ -86,7 +86,6 @@ LOCAL_SRC_FILES:= \
 	android_util_XmlBlock.cpp \
 	android_util_PackageRedirectionMap.cpp \
 	android/graphics/AutoDecodeCancel.cpp \
-	android/graphics/Bitmap.cpp \
 	android/graphics/BitmapFactory.cpp \
 	android/graphics/Camera.cpp \
 	android/graphics/Canvas.cpp \
@@ -228,6 +227,11 @@ LOCAL_SHARED_LIBRARIES += libtime_genoff
 $(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libtime_genoff_intermediates/)
 $(shell touch $(OUT)/obj/SHARED_LIBRARIES/libtime_genoff_intermediates/export_includes)
 endif
+
+# enable for all devices
+TARGET_arm_CFLAGS += -DUSE_NEON_BITMAP_OPTS -mvectorize-with-neon-quad
+LOCAL_SRC_FILES+= \
+    android/graphics/Bitmap.cpp.arm
 
 ifeq ($(USE_OPENGL_RENDERER),true)
 	LOCAL_SHARED_LIBRARIES += libhwui
