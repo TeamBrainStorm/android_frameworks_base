@@ -24,7 +24,6 @@ import com.android.internal.app.ProcessStats;
 import com.android.internal.os.PkgUsageStats;
 import com.android.internal.os.TransferPipe;
 import com.android.internal.util.FastPrintWriter;
-import com.android.internal.util.MemInfoReader;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,9 +36,6 @@ import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.hardware.display.DisplayManager;
-import android.hardware.display.DisplayManagerGlobal;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Debug;
@@ -55,7 +51,6 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Slog;
-import android.view.Display;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -73,9 +68,6 @@ public class ActivityManager {
 
     private final Context mContext;
     private final Handler mHandler;
-    private static long memSize;
-    private static long totalSize;
-    private static int pixels;
 
     /**
      * <a href="{@docRoot}guide/topics/manifest/meta-data-element.html">{@code
@@ -450,40 +442,6 @@ public class ActivityManager {
      * This is mostly intended to be used by apps to determine whether they should turn
      * off certain features that require more RAM.
      */
-    static public boolean isHighEndGfx() {
-        if (totalSize == 0) {
-            MemInfoReader reader = new MemInfoReader();
-			reader.readMemInfo();
-			totalSize = reader.getTotalSize();
-            reader = null;
-		}
-
-        if (totalSize >= (512*1024*1024)) {
-            return true;
-        }
-
-        if (pixels == 0) {
-			Display display = DisplayManagerGlobal.getInstance().getRealDisplay(
-                Display.DEFAULT_DISPLAY);
-			Point p = new Point();
-            display.getRealSize(p);
-            pixels = p.x * p.y;
-        }
-        if (pixels >= (1024*600)) {
-            // If this is a sufficiently large screen, then there are enough
-            // pixels on it that we'd really like to use hw drawing.
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Returns true if this is a low-RAM device.  Exactly whether a device is low-RAM
-     * is ultimately up to the device configuration, but currently it generally means
-     * something in the class of a 512MB device with about a 800x480 or less screen.
-     * This is mostly intended to be used by apps to determine whether they should turn
-     * off certain features that require more RAM.
-     */
     public boolean isLowRamDevice() {
         return isLowRamDeviceStatic();
     }
@@ -499,20 +457,9 @@ public class ActivityManager {
      * (which tends to consume a lot more RAM).
      * @hide
      */
-    static public boolean isLargeRAM() {
-        if (memSize == 0) {
-            MemInfoReader reader = new MemInfoReader();
-            reader.readMemInfo();
-            memSize = reader.getTotalSize();
-            reader = null;
-		}
-
-        if (memSize >= (640*1024*1024)) {
-            // Currently 640MB RAM available to the kernel is the point at
-            // which we have plenty of RAM to spare.
-            return true;
-        }
-        return false;
+    static public boolean isHighEndGfx() {
+        return !isLowRamDeviceStatic() &&
+                !Resources.getSystem().getBoolean(com.android.internal.R.bool.config_avoidGfxAccel);
     }
 
     /**
@@ -1916,6 +1863,7 @@ public class ActivityManager {
             return null;
         }
     }
+
     /**
      * @hide
      */
