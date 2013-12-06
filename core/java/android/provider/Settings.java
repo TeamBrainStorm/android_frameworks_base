@@ -2977,19 +2977,19 @@ public final class Settings {
         public static final String EXPANDED_BRIGHTNESS_MODE = "expanded_brightness_mode";
 
         /**
-         * Notification Power Widget - Custom Network Mode
+         * Notification Power Widget and QuickSettings - Custom Network Mode
          * @hide
          */
         public static final String EXPANDED_NETWORK_MODE = "expanded_network_mode";
 
         /**
-         * Notification Power Widget - Custom Screen Timeout
+         * Notification Power Widget and QuickSettings - Custom Screen Timeout
          * @hide
          */
         public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
 
         /**
-         * Notification Power Widget - Custom Ring Mode
+         * Notification Power Widget and QuickSettings - Custom Ring Mode
          * @hide
          */
         public static final String EXPANDED_RING_MODE = "expanded_ring_mode";
@@ -3294,25 +3294,7 @@ public final class Settings {
         public static final String QUICK_TILES_BG_ALPHA = "quick_tiles_bg_alpha";
 
         /**
-         * QuickSettings network modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_NETWORK_MODE = "expanded_network_mode";
-
-        /**
-         * QuickSettings screen timeout modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
-
-        /**
-         * QuickSettings ring modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_RING_MODE = "expanded_ring_mode";
-
-        /**
-         * Quick Settings Quick Pulldown
+         * QuickSettings Quick Pulldown
          *
          * @hide
          */
