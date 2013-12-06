@@ -46,6 +46,7 @@
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_screen_timeout">Timeout</string>
     <string name="quick_settings_screen_timeout_summary">%1$d %2$s</string>
+    <string name="quick_settings_screen_timeout_summary_never">Never</string>
     <string name="quick_settings_usb_tether_off_label">Disconnected</string>
     <string name="quick_settings_usb_tether_connected_label">Tethering off</string>
     <string name="quick_settings_usb_tether_on_label">Tethering</string>
@@ -57,6 +58,10 @@
     <string name="quick_settings_lte_off">LTE off</string>
     <string name="quick_settings_volume">Volume</string>
     <string name="quick_settings_profile_label">Profile</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pause</string>
+    <string name="quick_settings_reboot_recovery">Recovery</string>
+    <string name="quick_settings_reboot">Reboot</string>
 
     <!-- Expanded desktop -->
     <string name="quick_settings_expanded_desktop">Expanded</string>

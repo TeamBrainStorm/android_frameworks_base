@@ -44,7 +44,7 @@ import android.view.InputDevice;
 
 import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IBatteryStats;
-import com.android.internal.util.cm.QuietHoursUtils;
+import com.android.internal.util.liquid.QuietHoursUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;

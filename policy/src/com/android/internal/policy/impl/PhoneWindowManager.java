@@ -73,7 +73,7 @@ import android.os.Vibrator;
 import android.provider.Settings;
 
 import com.android.internal.app.ThemeUtils;
-import com.android.internal.util.cm.DevUtils;
+import com.android.internal.util.liquid.DevUtils;
 import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
 import com.android.internal.os.DeviceKeyHandler;

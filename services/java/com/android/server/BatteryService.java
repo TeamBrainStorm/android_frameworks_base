@@ -18,7 +18,7 @@ package com.android.server;
 
 import android.os.BatteryStats;
 import com.android.internal.app.IBatteryStats;
-import com.android.internal.util.cm.QuietHoursUtils;
+import com.android.internal.util.liquid.QuietHoursUtils;
 import com.android.server.am.BatteryStatsService;
 
 import android.app.ActivityManagerNative;
