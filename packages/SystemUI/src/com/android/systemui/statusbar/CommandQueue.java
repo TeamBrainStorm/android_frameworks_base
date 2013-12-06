@@ -63,6 +63,7 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_TOGGLE_SCREENSHOT          = 21 << MSG_SHIFT;
     private static final int MSG_TOGGLE_LAST_APP            = 22 << MSG_SHIFT;
     private static final int MSG_TOGGLE_KILL_APP            = 23 << MSG_SHIFT;
+    private static final int MSG_SET_WINDOW_STATE           = 24 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -104,7 +105,6 @@ public class CommandQueue extends IStatusBar.Stub {
         public void showSearchPanel();
         public void hideSearchPanel();
         public void cancelPreloadRecentApps();
-        public void setNavigationIconHints(int hints);
         public void setWindowState(int window, int state);
         public void setAutoRotate(boolean enabled);
         public void toggleNotificationShade();
@@ -239,13 +239,6 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
-    public void setNavigationIconHints(int hints) {
-        synchronized (mList) {
-            mHandler.removeMessages(MSG_SET_NAVIGATION_ICON_HINTS);
-            mHandler.obtainMessage(MSG_SET_NAVIGATION_ICON_HINTS, hints, 0, null).sendToTarget();
-        }
-    }
-
     public void setWindowState(int window, int state) {
         synchronized (mList) {
             // don't coalesce these
@@ -373,9 +366,6 @@ public class CommandQueue extends IStatusBar.Stub {
                 case MSG_CANCEL_PRELOAD_RECENT_APPS:
                     mCallbacks.cancelPreloadRecentApps();
                     break;
-                case MSG_SET_NAVIGATION_ICON_HINTS:
-                    mCallbacks.setNavigationIconHints(msg.arg1);
-                    break;
                 case MSG_SET_WINDOW_STATE:
                     mCallbacks.setWindowState(msg.arg1, msg.arg2);
                     break;
@@ -401,4 +391,3 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 }
-
