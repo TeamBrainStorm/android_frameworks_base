@@ -457,11 +457,9 @@ public class ActivityManager {
 			totalSize = reader.getTotalSize();
             reader = null;
 		}
-
         if (totalSize >= (512*1024*1024)) {
             return true;
         }
-
         if (pixels == 0) {
 			Display display = DisplayManagerGlobal.getInstance().getRealDisplay(
                 Display.DEFAULT_DISPLAY);
@@ -506,7 +504,6 @@ public class ActivityManager {
             memSize = reader.getTotalSize();
             reader = null;
 		}
-
         if (memSize >= (640*1024*1024)) {
             // Currently 640MB RAM available to the kernel is the point at
             // which we have plenty of RAM to spare.
