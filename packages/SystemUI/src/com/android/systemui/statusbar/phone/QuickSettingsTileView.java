@@ -40,6 +40,7 @@ public class QuickSettingsTileView extends FrameLayout {
     private int mColSpan;
     private boolean mPrepared;
     private OnPrepareListener mOnPrepareListener;
+    private int mRowSpan;
 
     public QuickSettingsTileView(Context context, AttributeSet attrs) {
         super(context, attrs);

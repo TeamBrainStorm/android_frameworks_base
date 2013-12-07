@@ -83,6 +83,7 @@ public final class NavigationBarTransitions extends BarTransitions {
         final View back = mView.getBackButton();
         final View home = mView.getHomeButton();
         final View recent = mView.getRecentsButton();
+        final View menu = mView.getMenuButton();
         if (back != null) {
             setKeyButtonViewQuiescentAlpha(back, alpha, animate);
         }
@@ -91,6 +92,9 @@ public final class NavigationBarTransitions extends BarTransitions {
         }
         if (recent != null) {
             setKeyButtonViewQuiescentAlpha(recent, alpha, animate);
+        }
+        if (menu != null) {
+            setKeyButtonViewQuiescentAlpha(menu, alpha, animate);
         }
         List<Integer> buttonIdList = mView.getButtonIdList();
         for (int i = 0; i < buttonIdList.size(); i++) {

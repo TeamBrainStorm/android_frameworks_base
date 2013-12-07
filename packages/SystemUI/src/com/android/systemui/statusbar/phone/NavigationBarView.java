@@ -67,7 +67,6 @@ import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.DelegateViewHelper;
 import com.android.systemui.statusbar.policy.KeyButtonView;
 import com.android.systemui.statusbar.policy.DeadZone;
-import com.android.systemui.statusbar.policy.KeyButtonView;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -207,8 +206,8 @@ public class NavigationBarView extends LinearLayout {
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    mDelegateHelper.setDisabled(!hasNavringTargets());
-                    transitionCameraAndSearchButtonAlpha(1.0f);
+                    mDelegateHelper.setDisabled(false);
+                    mBarTransitions.setContentVisible(true);
                     break;
             }
             return KeyguardTouchDelegate.getInstance(getContext()).dispatch(event);
