@@ -83,7 +83,8 @@ public final class NavigationBarTransitions extends BarTransitions {
         final View back = mView.getBackButton();
         final View home = mView.getHomeButton();
         final View recent = mView.getRecentsButton();
-        final View menu = mView.getMenuButton();
+        final View leftmenu = mView.getLeftMenuButton();
+        final View rightmenu = mView.getRightMenuButton();
         if (back != null) {
             setKeyButtonViewQuiescentAlpha(back, alpha, animate);
         }
@@ -93,8 +94,11 @@ public final class NavigationBarTransitions extends BarTransitions {
         if (recent != null) {
             setKeyButtonViewQuiescentAlpha(recent, alpha, animate);
         }
-        if (menu != null) {
-            setKeyButtonViewQuiescentAlpha(menu, alpha, animate);
+        if (leftmenu != null) {
+            setKeyButtonViewQuiescentAlpha(leftmenu, alpha, animate);
+        }
+        if (rightmenu != null) {
+            setKeyButtonViewQuiescentAlpha(rightmenu, alpha, animate);
         }
         List<Integer> buttonIdList = mView.getButtonIdList();
         for (int i = 0; i < buttonIdList.size(); i++) {
@@ -122,7 +126,8 @@ public final class NavigationBarTransitions extends BarTransitions {
         backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getCameraButton());
         backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getHomeButton());
         backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getRecentsButton());
-        backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getMenuButton());
+        backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getLeftMenuButton());
+        backAlpha = maxVisibleQuiescentAlpha(backAlpha, mView.getRightMenuButton());
         if (backAlpha > 0) {
             setKeyButtonViewQuiescentAlpha(mView.getBackButton(), backAlpha, animate);
         }

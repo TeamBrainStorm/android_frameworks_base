@@ -82,4 +82,9 @@
     <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> free</string>
     <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> used</string>
 
+    <!-- QuickSettings: Wifi display [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_wifi_display_label">Wi-Fi Display</string>
+    <!-- QuickSettings: Wifi display [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_wifi_display_no_connection_label">Wireless Display</string>
+
 </resources>
