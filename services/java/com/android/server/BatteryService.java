@@ -18,7 +18,7 @@ package com.android.server;
 
 import android.os.BatteryStats;
 import com.android.internal.app.IBatteryStats;
-import com.android.internal.util.liquid.QuietHoursUtils;
+import com.android.internal.util.liquid.QuietHoursHelper;
 import com.android.server.am.BatteryStatsService;
 
 import android.app.ActivityManagerNative;
@@ -143,11 +143,6 @@ public final class BatteryService extends Binder {
 
     private BatteryListener mBatteryPropertiesListener;
     private IBatteryPropertiesRegistrar mBatteryPropertiesRegistrar;
-
-    // Quiet hours support
-    private boolean mQuietHoursEnabled = false;
-    private int mQuietHoursStart = 0;
-    private int mQuietHoursEnd = 0;
 
     public BatteryService(Context context, LightsService lights) {
         mContext = context;
@@ -735,7 +730,7 @@ public final class BatteryService extends Binder {
             if (!mLightEnabled) {
                 // No lights if explicitly disabled
                 mBatteryLight.turnOff();
-            } else if (QuietHoursUtils.inQuietHours(mContext, Settings.System.QUIET_HOURS_DIM)) {
+            } else if (QuietHoursHelper.inQuietHours(mContext, Settings.System.QUIET_HOURS_DIM)) {
                 if (mLedPulseEnabled && level < mLowBatteryWarningLevel &&
                         status != BatteryManager.BATTERY_STATUS_CHARGING) {
                     // The battery is low, the device is not charging and the low battery pulse
@@ -862,17 +857,6 @@ public final class BatteryService extends Binder {
                     Settings.System.BATTERY_LIGHT_FULL_COLOR,
                     res.getInteger(
                         com.android.internal.R.integer.config_notificationsBatteryFullARGB),
-                    UserHandle.USER_CURRENT_OR_SELF);
-
-            // Quiet Hours
-            mQuietHoursEnabled = Settings.System.getIntForUser(resolver,
-                    Settings.System.QUIET_HOURS_ENABLED, 0,
-                    UserHandle.USER_CURRENT_OR_SELF) != 0;
-            mQuietHoursStart = Settings.System.getIntForUser(resolver,
-                    Settings.System.QUIET_HOURS_START, 0,
-                    UserHandle.USER_CURRENT_OR_SELF);
-            mQuietHoursEnd = Settings.System.getIntForUser(resolver,
-                    Settings.System.QUIET_HOURS_END, 0,
                     UserHandle.USER_CURRENT_OR_SELF);
 
             updateLedPulse();
