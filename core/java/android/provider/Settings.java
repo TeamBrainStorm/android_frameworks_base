@@ -3398,12 +3398,11 @@ public final class Settings {
          */
         public static final String NOTIFICATION_BACKGROUND = "notification_background";
 
-       /**
-        * Sets the landscape background of notification drawer
-        * @hide
-        */
-        public static final String NOTIFICATION_BACKGROUND_LANDSCAPE =
-                "notification_background_landscape";
+        /**
+         * Sets the landscape background of notification drawer
+         * @hide
+         */
+        public static final String NOTIFICATION_BACKGROUND_LANDSCAPE = "notification_background_landscape";
 
         /**
          * Sets the alpha (transparency) of notification wallpaper
@@ -3428,8 +3427,7 @@ public final class Settings {
          * 0 = all, 1 = system icons, 2 = system icons + custom user icons
          * @hide
          */
-        public static final String NAVIGATION_BAR_BUTTON_TINT_MODE =
-                "navigation_bar_button_tint_mode";
+        public static final String NAVIGATION_BAR_BUTTON_TINT_MODE = "navigation_bar_button_tint_mode";
 
         /**
          * Navigation bar glow color
@@ -3459,8 +3457,7 @@ public final class Settings {
          * Navigation bar height when it is on landscape at the bottom
          * @hide
          */
-        public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE =
-                "navigation_bar_height_landscape";
+        public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
 
         /**
          * Navigation bar height when it is on landscape at the right
@@ -3504,8 +3501,7 @@ public final class Settings {
          * 5 = none
          * @hide
          */
-        public static final String POWER_UI_LOW_BATTERY_WARNING_POLICY =
-                "power_ui_low_battery_warning_policy";
+        public static final String POWER_UI_LOW_BATTERY_WARNING_POLICY = "power_ui_low_battery_warning_policy";
 
         /**
          * Hide carrier information on notification drawer
@@ -3529,8 +3525,7 @@ public final class Settings {
          * Whether to colorize the default application icons
          * @hide
          */
-        public static final String NOTIFICATION_SHORTCUTS_COLOR_MODE =
-                "notification_shortcuts_color_mode";
+        public static final String NOTIFICATION_SHORTCUTS_COLOR_MODE = "notification_shortcuts_color_mode";
 
         /**
          * How long to wait between playing notification sounds from a package
@@ -3805,14 +3800,7 @@ public final class Settings {
          * Whether to use the custom quick unlock screen control
          * @hide
          */
-        public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL =
-                "lockscreen_quick_unlock_control";
-
-        /**
-         * Should the non-intrsive incall ui be used
-         * @hide
-         */
-        public static final String NON_INTRUSIVE_INCALL = "non_intrusive_incall";
+        public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
