@@ -2028,7 +2028,6 @@ public class NotificationManagerService extends INotificationManager.Stub
                                                .equals(notification.sound);
 
                         Uri soundUri = null;
-                        boolean hasValidSound = false;
 
                         if (!(QuietHoursHelper.inQuietHours(
                                     mContext, Settings.System.QUIET_HOURS_MUTE))
