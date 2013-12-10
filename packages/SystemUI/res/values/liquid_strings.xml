@@ -82,11 +82,6 @@
     <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> free</string>
     <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> used</string>
 
-    <!-- QuickSettings: Wifi display [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_wifi_display_label">Wi-Fi Display</string>
-    <!-- QuickSettings: Wifi display [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_wifi_display_no_connection_label">Wireless Display</string>
-	
 	<!-- Content description of the halo button in the notification panel for accessibility (not sho
           wn on the screen). [CHAR LIMIT=NONE] -->  
     <string name="accessibility_halo">Create notification halo.</string>  
