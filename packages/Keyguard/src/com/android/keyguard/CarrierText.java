@@ -91,11 +91,7 @@ public class CarrierText extends TextView {
         String customLabel = Settings.System.getString(getContext().getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_LABEL);
         if (customLabel == null || customLabel.length() == 0) {
-            if (KeyguardViewManager.USE_UPPER_CASE) {
-                setText(text != null ? text.toString().toUpperCase() : null);
-            } else {
-                setText(text);
-            }
+            setText(text);
         } else {
             setText(customLabel);
         }
