@@ -6021,8 +6021,8 @@ public final class Settings {
             UI_NIGHT_MODE,
             PRIVACY_GUARD_DEFAULT,
             PRIVACY_GUARD_NOTIFICATION,
-            ADVANCED_REBOOT
-            UI_INVERTED_MODE,
+            ADVANCED_REBOOT,
+            UI_INVERTED_MODE
         };
 
         /**
