@@ -672,7 +672,7 @@ public class ActiveDisplayView extends FrameLayout {
     }
 
     private synchronized void handleShowNotification(boolean ping) {
-        if (!mDisplayNotifications || mNotification == null || QuietHoursHelper.inQuietHours()()()) return;
+        if (!mDisplayNotifications || mNotification == null || inQuietHours()) return;
         handleShowNotificationView();
         setActiveNotification(mNotification, true);
         inflateRemoteView(mNotification);
@@ -991,7 +991,7 @@ public class ActiveDisplayView extends FrameLayout {
     /**
      * Check if device is in Quiet Hours in the moment.
      */
-    private boolean QuietHoursHelper.inQuietHours()() {
+    private boolean inQuietHours() {
         boolean quietHoursEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.QUIET_HOURS_ENABLED, 0, UserHandle.USER_CURRENT_OR_SELF) != 0;
         int quietHoursStart = Settings.System.getIntForUser(mContext.getContentResolver(),
@@ -1157,7 +1157,7 @@ public class ActiveDisplayView extends FrameLayout {
                 boolean isFar = value >= mProximitySensor.getMaximumRange();
                 if (isFar) {
                     mProximityIsFar = true;
-                    if (!isScreenOn() && mPocketMode != POCKET_MODE_OFF && !isOnCall() && !QuietHoursHelper.inQuietHours()()) {
+                    if (!isScreenOn() && mPocketMode != POCKET_MODE_OFF && !isOnCall() && !inQuietHours()) {
                         if (System.currentTimeMillis() >= (mPocketTime + mProximityThreshold) && mPocketTime != 0){
 
                             if (mNotification == null) {
