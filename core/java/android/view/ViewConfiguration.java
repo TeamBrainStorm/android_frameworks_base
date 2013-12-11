@@ -228,8 +228,6 @@ public class ViewConfiguration {
     private final int mOverflingDistance;
     private final boolean mFadingMarqueeEnabled;
 
-    private Context mContext;
-
     static final SparseArray<ViewConfiguration> sConfigurations =
             new SparseArray<ViewConfiguration>(2);
 
@@ -694,14 +692,6 @@ public class ViewConfiguration {
             }
         } catch (RemoteException ex) {
             // do nothing, continue trying to guess
-        }
-
-        // Report no menu key if overflow button is forced to enabled
-        ContentResolver res = mContext.getContentResolver();
-        boolean forceOverflowButton = Settings.System.getInt(res,
-                Settings.System.UI_FORCE_OVERFLOW_BUTTON, 0) == 1;
-        if (forceOverflowButton) {
-            return false;
         }
 
         // Report menu key presence based on hardware key rebinding

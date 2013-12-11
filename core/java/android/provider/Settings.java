@@ -3663,14 +3663,6 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_SEE_THROUGH = "lockscreen_see_through";
 
-        /**
-         * Control the display of the action overflow button within app UI.
-         * 0 = use system default
-         * 1 = force on
-         * @hide
-         */
-        public static final String UI_FORCE_OVERFLOW_BUTTON = "ui_force_overflow_button";
-
 	    /**
          * whether which Ram Usage Bar mode is used on recent switcher
          * 0 = none, 1 = only app use, 2 = app and cache use, 3 = app, cache and system use
