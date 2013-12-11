@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -179,6 +180,10 @@ public class GlowPadView extends View {
     private RectF mArcRect;
     private float mArcAngle = 0f;
     private ArrayList<TargetDrawable> mNewTargetDrawables;
+
+    private Paint mArcPaint;
+    private RectF mArcRect;
+    private float mArcAngle = 0f;
 
     private class AnimationBundle extends ArrayList<Tweener> {
         private static final long serialVersionUID = 0xA84D78726F127468L;
@@ -1608,5 +1613,8 @@ public class GlowPadView extends View {
             mHandleDrawable = new TargetDrawable(res, 0);
         }
         mHandleDrawable.setState(TargetDrawable.STATE_INACTIVE);
+    public void setArc(float angle, int color) {
+        mArcAngle = angle;
+        mArcPaint.setColor(color);
     }
 }
