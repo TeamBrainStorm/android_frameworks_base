@@ -3791,7 +3791,30 @@ public final class Settings {
 
         /**
          * Whether to disable haptic feedback during quiet hours.
-         * HALO, should default to 0 (no, do not show)
+         * @hide
+         */
+        public static final String QUIET_HOURS_HAPTIC = "quiet_hours_haptic";
+
+        /**
+         * Whether to remove the vibration from outgoing notifications during quiet hours.
+         * @hide
+         */
+        public static final String QUIET_HOURS_STILL = "quiet_hours_still";
+
+        /**
+         * Whether to attempt to dim the LED color during quiet hours.
+         * @hide
+         */
+        public static final String QUIET_HOURS_DIM = "quiet_hours_dim";
+
+        /**
+         * Whether to remove the system sounds during quiet hours.
+         * @hide
+         */
+        public static final String QUIET_HOURS_SYSTEM = "quiet_hours_system";
+         
+        /** 
+         *HALO, should default to 0 (no, do not show)
          * @hide
          */
         public static final String HALO_ACTIVE = "halo_active";
@@ -3850,31 +3873,6 @@ public final class Settings {
          * @hide
          */
         public static final String HALO_UNLOCK_PING = "halo_unlock_ping";
-
-	/**
-         * whether which Ram Usage Bar mode is used on recent switcher
-         * 0 = none, 1 = only app use, 2 = app and cache use, 3 = app, cache and system use
-         * @hide
-         */
-        public static final String QUIET_HOURS_HAPTIC = "quiet_hours_haptic";
-
-        /**
-         * Whether to remove the vibration from outgoing notifications during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_STILL = "quiet_hours_still";
-
-        /**
-         * Whether to attempt to dim the LED color during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_DIM = "quiet_hours_dim";
-
-        /**
-         * Whether to remove the system sounds during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_SYSTEM = "quiet_hours_system";
 
         /**
          * Whether to use the custom quick unlock screen control
