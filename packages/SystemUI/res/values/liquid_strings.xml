@@ -24,6 +24,16 @@
     <!-- Power widget -->
     <string name="powerwidget_screen_timeout_toast">Screen timeout set to: %1$d %2$s</string>
 
+    <!-- Shortcut actions -->
+    <string name="shortcut_picker">Liquid Shortcuts</string>
+    <string name="shortcut_immersive">Immersive Mode Toggle</string>
+    <string name="shortcut_quiethours">Quiethours Toggle</string>
+    <string name="shortcut_rotation">Rotation Lock Toggle</string>
+    <string name="shortcut_torch">Torch Toggle</string>
+    <string name="shortcut_reboot">Reboot (instant)</string>
+    <string name="shortcut_last_app">Last App</string>
+    <string name="shortcut_screenshot">Screenshot</string>
+
     <!-- Quick settings -->
     <string name="quick_settings_gps">GPS</string>
     <string name="quick_settings_gps_off">GPS off</string>
