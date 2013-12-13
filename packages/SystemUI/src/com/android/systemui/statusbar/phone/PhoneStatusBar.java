@@ -3547,7 +3547,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
         if (newTheme != null &&
                 (mCurrentTheme == null || !mCurrentTheme.equals(newTheme))) {
             mCurrentTheme = (CustomTheme)newTheme.clone();
-            recreateStatusBar();
         } else {
             if (mClearButton instanceof TextView) {
                 ((TextView)mClearButton).setText(context.getText(R.string.status_bar_clear_all_button));
