@@ -116,5 +116,7 @@
     <string name="halo_signal_bars_2">TWO BARS</string>  
     <string name="halo_signal_bars_1">ONE BAR</string>  
     <string name="halo_signal_bars_none">NO BARS</string>
+    
+    <string name="status_bar_recent_add_to_split_view">Add to Split View</string>
 
 </resources>
