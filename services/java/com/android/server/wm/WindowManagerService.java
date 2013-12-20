@@ -10983,8 +10983,7 @@ public class WindowManagerService extends IWindowManager.Stub
         mLastStatusBarVisibility |= flag;
     }
 
-<<<<<<< HEAD
-=======
+
     /** SPLIT VIEW **/
 
     private int mSplitViewTasks[];
