@@ -82,13 +82,9 @@ import android.util.Log;
 import android.util.Slog;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
-<<<<<<< HEAD
 import com.android.internal.app.ActivityTrigger;
-=======
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
->>>>>>> 0f43f39... [WIP] Multi-window
-
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
