@@ -11165,5 +11165,5 @@ public class WindowManagerService extends IWindowManager.Stub
     }
 
     /** END SPLIT VIEW **/
->>>>>>> 0f43f39... [WIP] Multi-window
+
 }
