@@ -910,7 +910,7 @@ public class InputMethodService extends AbstractInputMethodService {
      * is currently running in fullscreen mode.
      */
     public void updateFullscreenMode() {
-<<<<<<< HEAD
+
         boolean fullScreenOverride = Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 0,
                 UserHandle.USER_CURRENT_OR_SELF) != 0;
@@ -920,9 +920,9 @@ public class InputMethodService extends AbstractInputMethodService {
         } else {
             isFullscreen = mShowInputRequested && onEvaluateFullscreenMode();
         }
-=======
+
         boolean isFullscreen = mShowInputRequested && (onEvaluateFullscreenMode() || onEvaluateSplitView());
->>>>>>> 0f43f39... [WIP] Multi-window
+
         boolean changed = mLastShowInputRequested != mShowInputRequested;
         if (mIsFullscreen != isFullscreen || !mFullscreenApplied) {
             changed = true;
